@@ -41,6 +41,7 @@ public class TestRecruiterJobApplications
     setUpJobApplicationManager();
   }
 
+  
   @Test
   public void jobseekersForApplicationsToRecruiterJob() throws NullPointerException
   {
