@@ -1,0 +1,85 @@
+package main;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class JobApplications implements Iterable<JobApplication>
+{
+
+  private final List<JobApplication> jobApplications;
+
+  public JobApplications()
+  {
+    this.jobApplications = new ArrayList<>();
+  }
+
+  public JobApplications(List<JobApplication> applications)
+  {
+    this.jobApplications = applications;
+  }
+
+  public JobApplication add(JobApplication jobApplication)
+  {
+    if (jobApplication == null)
+      throw new NullPointerException("Job application cannot be null");
+    jobApplications.add(jobApplication);
+    return jobApplication;
+  }
+
+  public JobApplications jobsAppliedBy(Jobseeker jobseeker)
+  {
+    List<JobApplication> applicationsByJobseeker = new ArrayList<>();
+    for (JobApplication application : jobApplications)
+    {
+      addApplicationIfAppliedBy(jobseeker, applicationsByJobseeker, application);
+    }
+    return new JobApplications(applicationsByJobseeker);
+  }
+
+  public void addApplicationIfAppliedBy(Jobseeker jobseeker,
+                                        List<JobApplication> applicationsByJobseeker,
+                                        JobApplication application)
+  {
+    if (application.isAppliedBy(jobseeker))
+    {
+      applicationsByJobseeker.add(application);
+    }
+  }
+
+  public void display()
+  {
+    for (JobApplication application : jobApplications)
+    {
+      application.display();
+    }
+  }
+
+  public int size()
+  {
+    return jobApplications.size();
+  }
+
+  @Override
+  public Iterator<JobApplication> iterator()
+  {
+    // TODO Auto-generated method stub
+    Iterator<JobApplication> iter = jobApplications.iterator();
+    return iter;
+  }
+
+  public boolean contains(JobApplication jobApplication)
+  {
+    return jobApplications.contains(jobApplication);
+  }
+
+  public boolean containsAll(JobApplications applications)
+  {
+    for (JobApplication application : applications)
+    {
+      if (!jobApplications.contains(application))
+        return false;
+    }
+    return true;
+  }
+}
