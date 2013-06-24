@@ -2,8 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.Jobseeker;
-import main.Jobseekers;
+import main.jobseeker.Jobseeker;
+import main.jobseeker.Jobseekers;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,10 +12,9 @@ public class TestJobseekers
 {
 
   private Jobseekers jobseekers;
-  private Jobseeker jobseeker;
 
   @Before
-  public void setUp() throws NullPointerException
+  public void setUp() 
   {
     setUpJobseekers();
     setUpJobseeker();
@@ -27,37 +26,38 @@ public class TestJobseekers
     assertEquals(0, jobseekers.size());
   }
 
-  @Test(expected = Exception.class)
-  public void addNullJobseeker() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void addNullJobseeker() 
   {
     jobseekers.add(null);
   }
 
   @Test
-  public void addJobseeker() throws NullPointerException
+  public void addJobseeker() 
   {
-    Jobseeker jobseeker1 = jobseekers.add(jobseeker);
-    assertTrue(jobseekers.contains(jobseeker1));
+    Jobseeker jobseeker = jobseekers.add(setUpJobseeker());
+    assertTrue(jobseekers.contains(jobseeker));
   }
 
   @Test
-  public void addTwoJobseekerWithSameName() throws NullPointerException
+  public void addTwoJobseekerWithSameName() 
   {
-    Jobseeker jobseeker1 = jobseekers.add(jobseeker);
-    Jobseeker jobseeker2 = jobseekers.add(new Jobseeker("Tom"));
+    Jobseeker jobseeker1 = jobseekers.add(setUpJobseeker());
+    Jobseeker jobseeker2 = jobseekers.add(setUpJobseeker());
     jobseekers.display();
+    assertFalse(jobseeker1.equals(jobseeker2));
     assertTrue(jobseekers.contains(jobseeker1));
     assertTrue(jobseekers.contains(jobseeker2));
   }
 
-  public void setUpJobseekers()
+  private void setUpJobseekers()
   {
     jobseekers = new Jobseekers();
   }
   
-  public void setUpJobseeker()
+  private Jobseeker setUpJobseeker()
   {
-    jobseeker = new Jobseeker("Tom");
+   return new Jobseeker("Tom");
   }
 
 }

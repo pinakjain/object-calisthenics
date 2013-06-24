@@ -1,19 +1,20 @@
-package main;
+package main.utils;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class ApplicationDate
+public class DateUtils
 {
+
   public static Date createDate()
   {
-    Calendar calendar = Calendar.getInstance();
+    Calendar calendar = createCalendarInstance();
     return calendar.getTime();
   }
 
-  public static boolean compareDate(Date date1,
-                                    Date date2)
+  public static boolean areSameDay(Date date1,
+                                   Date date2)
   {
     Calendar c1 = removeTimeInfoFromDate(date1);
     Calendar c2 = removeTimeInfoFromDate(date2);
@@ -22,11 +23,15 @@ public class ApplicationDate
 
   public static Calendar removeTimeInfoFromDate(Date date)
   {
-    Calendar calendar = Calendar.getInstance();
+    Calendar calendar = createCalendarInstance();
     calendar.setTime(date);
     return new GregorianCalendar(calendar.get(Calendar.YEAR),
                                  calendar.get(Calendar.MONTH),
                                  calendar.get(Calendar.DAY_OF_MONTH));
   }
 
+  private static Calendar createCalendarInstance()
+  {
+    return Calendar.getInstance();
+  }
 }

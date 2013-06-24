@@ -2,56 +2,49 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.ATSJob;
-import main.Recruiter;
-import main.RecruiterJob;
+import main.jobs.ATSJob;
+import main.recruiter.Recruiter;
+import main.jobs.RecruiterJob;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestRecruiterJob
 {
 
   private RecruiterJob recruiterJob;
-  private Recruiter    recruiter;
 
-  @Before
-  public void setUp() throws NullPointerException
-  {
-    setUpRecruiter();
-  }
-
-  @Test(expected = Exception.class)
-  public void createRecruiterJobWithNullArguments() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createRecruiterJobWithNullArguments()
   {
     recruiterJob = new RecruiterJob(null, null);
   }
 
-  @Test(expected = Exception.class)
-  public void createRecruiterJobWithNullRecruiter() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createRecruiterJobWithNullRecruiter()
   {
     recruiterJob = new RecruiterJob(null, createATSJob());
   }
 
-  @Test(expected = Exception.class)
-  public void createRecruiterJobWithNullJob() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createRecruiterJobWithNullJob()
   {
-    recruiterJob = new RecruiterJob(recruiter, null);
+    recruiterJob = new RecruiterJob(setUpRecruiter(), null);
   }
 
   @Test
-  public void createRecruiterJob() throws NullPointerException
+  public void createRecruiterJob()
   {
-    recruiterJob = new RecruiterJob(recruiter, createATSJob());
-    assertEquals(new String("ATSJob :- Software posted by Recruiter :- Ladders"), recruiterJob.toString());
+    recruiterJob = new RecruiterJob(setUpRecruiter(), createATSJob());
+    assertEquals("ATSJob :- Software posted by Recruiter :- Ladders", recruiterJob.toString());
   }
 
-  public void setUpRecruiter() throws NullPointerException
+  
+  private Recruiter setUpRecruiter()
   {
-    recruiter = new Recruiter("Ladders");
+    return new Recruiter("Ladders");
   }
 
-  public ATSJob createATSJob() throws NullPointerException
+  private ATSJob createATSJob()
   {
     return new ATSJob("Software");
   }

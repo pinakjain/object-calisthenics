@@ -2,11 +2,10 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.ATSJob;
-import main.JReqJob;
-import main.Job;
+import main.jobs.ATSJob;
+import main.jobs.JReqJob;
+import main.jobs.Job;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestJob
@@ -14,45 +13,41 @@ public class TestJob
 
   private Job job;
 
-  @Before
-  public void setUp() throws NullPointerException
-  {}
-
-  @Test(expected = Exception.class)
-  public void createATSJobWithNullTitle() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createATSJobWithNullTitle()
   {
     job = new ATSJob(null);
   }
 
-  @Test(expected = Exception.class)
-  public void createATSJobWithEmptyTitle() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createATSJobWithEmptyTitle()
   {
     job = new ATSJob("");
   }
 
-  @Test(expected = Exception.class)
-  public void createJReqJobWithNullTitle() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createJReqJobWithNullTitle()
   {
     job = new JReqJob(null);
   }
 
-  @Test(expected = Exception.class)
-  public void createJReqJobWithEmptyTitle() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createJReqJobWithEmptyTitle()
   {
     job = new JReqJob("");
   }
 
   @Test
-  public void createJReqJob() throws NullPointerException
+  public void createJReqJob()
   {
     job = new JReqJob("Software");
-    assertEquals(new String("JReqJob :- Software"), job.toString());
+    assertEquals("JReqJob :- Software", job.toString());
   }
 
   @Test
-  public void createATSJob() throws NullPointerException
+  public void createATSJob()
   {
     job = new ATSJob("Software");
-    assertEquals(new String("ATSJob :- Software"), job.toString());
+    assertEquals("ATSJob :- Software", job.toString());
   }
 }

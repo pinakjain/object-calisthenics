@@ -1,4 +1,4 @@
-package main;
+package main.jobseeker;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,14 +16,14 @@ public class Jobseekers implements Iterable<Jobseeker>
 
   public Jobseekers(List<Jobseeker> jobseekers)
   {
-    // TODO Auto-generated constructor stub
+    if(jobseekers == null) throw new IllegalArgumentException("Jobseekers cannot be null");
     this.jobseekers = jobseekers;
   }
 
-  public Jobseeker add(Jobseeker jobseeker) throws NullPointerException
+  public Jobseeker add(Jobseeker jobseeker) throws IllegalArgumentException
   {
     if (jobseeker == null)
-      throw new NullPointerException("Jobseeker needed to be added cannot be null");
+      throw new IllegalArgumentException("Jobseeker needed to be added cannot be null");
     jobseekers.add(jobseeker);
     return jobseeker;
   }
@@ -49,7 +49,6 @@ public class Jobseekers implements Iterable<Jobseeker>
   @Override
   public Iterator<Jobseeker> iterator()
   {
-    // TODO Auto-generated method stub
     Iterator<Jobseeker> iter = jobseekers.iterator();
     return iter;
   }

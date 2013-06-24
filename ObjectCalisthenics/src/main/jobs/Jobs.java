@@ -1,8 +1,10 @@
-package main;
+package main.jobs;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import main.recruiter.Recruiter;
 
 public class Jobs implements Iterable<RecruiterJob>
 {
@@ -19,10 +21,10 @@ public class Jobs implements Iterable<RecruiterJob>
     this.jobs = jobs;
   }
 
-  public RecruiterJob add(RecruiterJob job) throws NullPointerException
+  public RecruiterJob add(RecruiterJob job) throws IllegalArgumentException
   {
     if (job == null)
-      throw new NullPointerException("Job needed to be added cannot be null");
+      throw new IllegalArgumentException("Job needed to be added cannot be null");
     jobs.add(job);
     return job;
   }
@@ -45,7 +47,7 @@ public class Jobs implements Iterable<RecruiterJob>
     return new Jobs(jobPostings);
   }
 
-  public void addJobIfPostedBy(Recruiter recruiter,
+  private void addJobIfPostedBy(Recruiter recruiter,
                                List<RecruiterJob> jobPostings,
                                RecruiterJob job)
   {
@@ -63,7 +65,6 @@ public class Jobs implements Iterable<RecruiterJob>
   @Override
   public Iterator<RecruiterJob> iterator()
   {
-    // TODO Auto-generated method stub
     Iterator<RecruiterJob> iter = jobs.iterator();
     return iter;
   }

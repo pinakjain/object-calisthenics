@@ -1,40 +1,37 @@
-package main;
+package main.jobs;
+
+import main.utils.IdGenerator;
 
 public class JReqJob implements Job
 {
 
   private final String title;
-  private final int    id;
+  private final JobId  id;
 
   public JReqJob(String title) throws IllegalArgumentException
   {
     if (title == null || title.equals(""))
       throw new IllegalArgumentException("Title for a job cannot be null or empty");
     this.title = title;
-    this.id = IdGenerator.createId();
+    this.id = new JobId(IdGenerator.createId());
   }
 
   @Override
   public boolean requiresResume()
   {
-    // TODO Auto-generated method stub
     return true;
   }
 
   @Override
   public void display()
   {
-    // TODO Auto-generated method stub
     System.out.println("JReq Job :-" + title + " (ID = " + id + ")");
   }
 
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + id;
-    return result;
+    return id.hashCode();
   }
 
   @Override

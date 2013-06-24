@@ -1,6 +1,12 @@
-package main;
+package main.jobApplication;
 
 import java.util.Date;
+
+import main.utils.DateUtils;
+import main.jobs.RecruiterJob;
+import main.jobseeker.Jobseeker;
+import main.recruiter.Recruiter;
+import main.resume.Resume;
 
 public class JobApplication
 {
@@ -10,23 +16,23 @@ public class JobApplication
   private final Resume       resume;
   private final Date         date;
 
-  public JobApplication(Jobseeker jobseeker,
+  JobApplication(Jobseeker jobseeker,
                         RecruiterJob job,
-                        Resume resume) throws NullPointerException
+                        Resume resume) throws IllegalArgumentException
   {
     if (jobseeker == null)
-      throw new NullPointerException("Jobseeker cannot be null");
+      throw new IllegalArgumentException("Jobseeker cannot be null");
     if (job == null)
-      throw new NullPointerException("Job cannot be null");
+      throw new IllegalArgumentException("Job cannot be null");
     if (job.requiresResume() && resume == null)
-      throw new NullPointerException("Resume required for this job");
+      throw new IllegalArgumentException("Resume required for this job");
     this.jobseeker = jobseeker;
     this.job = job;
     this.resume = resume;
-    this.date = ApplicationDate.createDate();
+    this.date = DateUtils.createDate();
   }
 
-  public boolean isAppliedBy(Jobseeker jobseeker)
+  public boolean wasSubmittedBy(Jobseeker jobseeker)
   {
     if (this.jobseeker == jobseeker)
     {
@@ -51,7 +57,7 @@ public class JobApplication
 
   public boolean isAppliedOn(Date date)
   {
-    return ApplicationDate.compareDate(this.date, date);
+    return DateUtils.areSameDay(this.date, date);
   }
 
   public Jobseeker applier()

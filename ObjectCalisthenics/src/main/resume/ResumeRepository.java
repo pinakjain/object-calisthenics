@@ -1,7 +1,9 @@
-package main;
+package main.resume;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import main.jobseeker.Jobseeker;
 
 public class ResumeRepository
 {
@@ -14,12 +16,12 @@ public class ResumeRepository
   }
 
   public void add(Jobseeker jobseeker,
-                  Resume resume) throws NullPointerException
+                  Resume resume) throws IllegalArgumentException
   {
     if (jobseeker == null)
-      throw new NullPointerException("Jobseeker cannot be null");
+      throw new IllegalArgumentException("Jobseeker cannot be null");
     if (resume == null)
-      throw new NullPointerException("Resume cannot be null");
+      throw new IllegalArgumentException("Resume cannot be null");
     resumeRepo.put(jobseeker, resume);
   }
 

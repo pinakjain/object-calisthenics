@@ -1,7 +1,9 @@
-package main;
+package main.jobs;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import main.jobseeker.Jobseeker;
 
 public class SavedJobs
 {
@@ -14,13 +16,12 @@ public class SavedJobs
   }
 
   public RecruiterJob add(Jobseeker jobseeker,
-                          RecruiterJob recruiterJob) throws NullPointerException
+                          RecruiterJob recruiterJob) throws IllegalArgumentException
   {
-    // TODO Auto-generated method stub
     if (recruiterJob == null)
-      throw new NullPointerException("Job to be saved cannot be null");
+      throw new IllegalArgumentException("Job to be saved cannot be null");
     if (jobseeker == null)
-      throw new NullPointerException("Jobseeker cannot be null");
+      throw new IllegalArgumentException("Jobseeker cannot be null");
     savedJobs.put(jobseeker, addJobToTheSavedJobsForJobbseeker(jobseeker, recruiterJob));
     return recruiterJob;
   }
@@ -30,8 +31,8 @@ public class SavedJobs
     return savedJobs.get(jobseeker);
   }
 
-  public Jobs addJobToTheSavedJobsForJobbseeker(Jobseeker jobseeker,
-                                                RecruiterJob recruiterJob) throws NullPointerException
+  private Jobs addJobToTheSavedJobsForJobbseeker(Jobseeker jobseeker,
+                                                RecruiterJob recruiterJob) throws IllegalArgumentException
   {
     Jobs jobs = new Jobs();
     if (savedJobs.get(jobseeker) != null)

@@ -1,4 +1,6 @@
-package main;
+package main.jobs;
+
+import main.jobseeker.Jobseeker;
 
 public class SavedJobsManager
 {
@@ -7,13 +9,13 @@ public class SavedJobsManager
 
   public SavedJobsManager(SavedJobs savedJobs)
   {
+    if(savedJobs == null) throw new IllegalArgumentException("Saved jobs cannot be null");
     this.savedJobs = savedJobs;
   }
 
   public RecruiterJob save(Jobseeker jobseeker,
-                           RecruiterJob recruiterJob) throws NullPointerException
+                           RecruiterJob recruiterJob) throws IllegalArgumentException
   {
-    // TODO Auto-generated method stub
     return savedJobs.add(jobseeker, recruiterJob);
   }
 

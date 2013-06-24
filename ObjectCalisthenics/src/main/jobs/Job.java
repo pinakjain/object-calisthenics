@@ -1,4 +1,4 @@
-package main;
+package main.jobs;
 
 public interface Job
 {

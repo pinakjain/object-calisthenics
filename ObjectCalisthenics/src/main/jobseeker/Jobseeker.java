@@ -1,23 +1,30 @@
-package main;
+package main.jobseeker;
+
+import main.utils.IdGenerator;
+import main.jobApplication.JobApplication;
+import main.jobApplication.JobApplicationManager;
+import main.jobApplication.JobApplications;
+import main.jobs.Jobs;
+import main.jobs.RecruiterJob;
+import main.jobs.SavedJobsManager;
 
 public class Jobseeker
 {
 
-  private final String name;
-  private final int    id;
+  private final String      name;
+  private final JobseekerId id;
 
   public Jobseeker(String name) throws IllegalArgumentException
   {
     if (name == null || name.equals(""))
       throw new IllegalArgumentException("Jobseeker name cannot be null or empty");
     this.name = name;
-    this.id = IdGenerator.createId();
+    this.id = new JobseekerId(IdGenerator.createId());
   }
 
   public RecruiterJob save(RecruiterJob recruiterJob,
-                           SavedJobsManager savedJobsManager) throws NullPointerException
+                           SavedJobsManager savedJobsManager) throws IllegalArgumentException
   {
-    // TODO Auto-generated method stub
     return savedJobsManager.save(this, recruiterJob);
   }
 
@@ -27,7 +34,7 @@ public class Jobseeker
   }
 
   public JobApplication apply(RecruiterJob job,
-                              JobApplicationManager applicationManager) throws NullPointerException
+                              JobApplicationManager applicationManager) throws IllegalArgumentException
   {
     return applicationManager.apply(this, job);
   }
@@ -45,10 +52,7 @@ public class Jobseeker
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + id;
-    return result;
+    return id.hashCode();
   }
 
   @Override

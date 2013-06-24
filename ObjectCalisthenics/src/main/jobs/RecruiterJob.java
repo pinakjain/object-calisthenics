@@ -1,4 +1,6 @@
-package main;
+package main.jobs;
+
+import main.recruiter.Recruiter;
 
 public class RecruiterJob
 {
@@ -7,12 +9,12 @@ public class RecruiterJob
   private final Job       job;
 
   public RecruiterJob(Recruiter recruiter,
-                      Job job) throws NullPointerException
+                      Job job) throws IllegalArgumentException
   {
     if (recruiter == null)
-      throw new NullPointerException("Recruiter cannot be null");
+      throw new IllegalArgumentException("Recruiter cannot be null");
     if (job == null)
-      throw new NullPointerException("Job cannot be null");
+      throw new IllegalArgumentException("Job cannot be null");
     this.recruiter = recruiter;
     this.job = job;
   }
@@ -33,7 +35,6 @@ public class RecruiterJob
 
   public boolean requiresResume()
   {
-    // TODO Auto-generated method stub
     return job.requiresResume();
   }
 

@@ -1,8 +1,10 @@
-package main;
+package main.jobApplication;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import main.jobseeker.Jobseeker;
 
 public class JobApplications implements Iterable<JobApplication>
 {
@@ -16,13 +18,14 @@ public class JobApplications implements Iterable<JobApplication>
 
   public JobApplications(List<JobApplication> applications)
   {
+    if(applications == null) throw new IllegalArgumentException("Applications cannot be null");
     this.jobApplications = applications;
   }
 
-  public JobApplication add(JobApplication jobApplication)
+  public JobApplication add(JobApplication jobApplication) throws IllegalArgumentException
   {
     if (jobApplication == null)
-      throw new NullPointerException("Job application cannot be null");
+      throw new IllegalArgumentException("Job application cannot be null");
     jobApplications.add(jobApplication);
     return jobApplication;
   }
@@ -37,11 +40,11 @@ public class JobApplications implements Iterable<JobApplication>
     return new JobApplications(applicationsByJobseeker);
   }
 
-  public void addApplicationIfAppliedBy(Jobseeker jobseeker,
+  private void addApplicationIfAppliedBy(Jobseeker jobseeker,
                                         List<JobApplication> applicationsByJobseeker,
                                         JobApplication application)
   {
-    if (application.isAppliedBy(jobseeker))
+    if (application.wasSubmittedBy(jobseeker))
     {
       applicationsByJobseeker.add(application);
     }
@@ -63,7 +66,6 @@ public class JobApplications implements Iterable<JobApplication>
   @Override
   public Iterator<JobApplication> iterator()
   {
-    // TODO Auto-generated method stub
     Iterator<JobApplication> iter = jobApplications.iterator();
     return iter;
   }

@@ -2,17 +2,17 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.ATSJob;
-import main.Applier;
-import main.JReqJob;
-import main.JobApplication;
-import main.JobApplicationManager;
-import main.JobApplications;
-import main.Jobseeker;
-import main.Recruiter;
-import main.RecruiterJob;
-import main.Resume;
-import main.ResumeRepository;
+import main.jobs.ATSJob;
+import main.jobApplication.JobApplicationFactory;
+import main.jobs.JReqJob;
+import main.jobApplication.JobApplication;
+import main.jobApplication.JobApplicationManager;
+import main.jobApplication.JobApplications;
+import main.jobseeker.Jobseeker;
+import main.recruiter.Recruiter;
+import main.jobs.RecruiterJob;
+import main.resume.Resume;
+import main.resume.ResumeRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class TestJobseekerJobs
   private Recruiter             recruiter;
 
   @Before
-  public void setUp() throws NullPointerException
+  public void setUp()
   {
     setUpJobseeker();
     setUpResumeRepo();
@@ -37,35 +37,35 @@ public class TestJobseekerJobs
 
   }
 
-  @Test(expected = Exception.class)
-  public void applyToANullJob() throws Exception
+  @Test(expected = IllegalArgumentException.class)
+  public void applyToANullJob()
   {
     jobseeker.apply(null, jobApplicationManager);
   }
 
   @Test
-  public void applyATSJob() throws NullPointerException
+  public void applyATSJob()
   {
     JobApplication application = applyATSJOb();
     assertTrue(jobApplications.contains(application));
   }
 
   @Test
-  public void applyJreqJobUsingResume() throws NullPointerException
+  public void applyJreqJobUsingResume()
   {
     JobApplication application = applyJReqJob();
     assertTrue(jobApplications.contains(application));
   }
 
-  @Test(expected = Exception.class)
-  public void applyJreqJobWithoutUsingResume() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void applyJreqJobWithoutUsingResume()
   {
     RecruiterJob recruiterJob = new RecruiterJob(recruiter, new JReqJob("Software"));
     jobseeker.apply(recruiterJob, jobApplicationManager);
   }
 
   @Test
-  public void multipleJobsAppliedByJobseeker() throws NullPointerException
+  public void multipleJobsAppliedByJobseeker()
   {
     applyATSJOb();
     applyJReqJob();
@@ -74,38 +74,38 @@ public class TestJobseekerJobs
     assertTrue(jobApplications.containsAll(applications));
   }
 
-  public void setUpResumeRepo()
+  private void setUpResumeRepo()
   {
     resumeRepository = new ResumeRepository();
   }
 
-  public void setUpJobApplications()
+  private void setUpJobApplications()
   {
     jobApplications = new JobApplications();
   }
 
-  public void setUpJobApplicationManager()
+  private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, new Applier(resumeRepository));
+    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository));
   }
 
-  public void setUpJobseeker() throws NullPointerException
+  private void setUpJobseeker()
   {
     jobseeker = new Jobseeker("Tom");
   }
 
-  public void setUpRecruiter() throws NullPointerException
+  private void setUpRecruiter()
   {
     recruiter = new Recruiter("Ladders");
   }
 
-  public JobApplication applyATSJOb() throws NullPointerException
+  private JobApplication applyATSJOb()
   {
     RecruiterJob recruiterJob = new RecruiterJob(recruiter, new ATSJob("Software"));
     return jobseeker.apply(recruiterJob, jobApplicationManager);
   }
 
-  public JobApplication applyJReqJob() throws NullPointerException
+  private JobApplication applyJReqJob()
   {
     RecruiterJob recruiterJob = new RecruiterJob(recruiter, new JReqJob("Software"));
     resumeRepository.add(jobseeker, new Resume("My Resume"));

@@ -4,16 +4,18 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
-import main.ATSJob;
-import main.Applier;
-import main.JobApplication;
-import main.JobApplicationManager;
-import main.JobApplications;
-import main.Jobseeker;
-import main.Jobseekers;
-import main.Recruiter;
-import main.RecruiterJob;
-import main.ResumeRepository;
+import main.jobs.ATSJob;
+import main.jobApplication.JobApplicationFactory;
+import main.jobApplication.JobApplication;
+import main.jobApplication.JobApplicationManager;
+import main.jobApplication.JobApplications;
+import main.jobseeker.Jobseeker;
+import main.jobseeker.Jobseekers;
+import main.recruiter.Recruiter;
+import main.jobs.RecruiterJob;
+import main.resume.Resume;
+import main.resume.ResumeRepository;
+import main.utils.DateUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,78 +28,94 @@ public class TestRecruiterJobApplications
   private JobApplicationManager jobApplicationManager;
   private ResumeRepository      resumeRepository;
   private RecruiterJob          recruiterJob;
-  private JobApplication application;
-  private Jobseeker jobseeker;
+  private JobApplication        application;
+  private Jobseeker             jobseeker;
+  private JobApplicationFactory               applier;
 
   @Before
-  public void setUp() throws NullPointerException
+  public void setUp()
   {
     setUpRecruiter();
+    setUpJobseeker();
     setUpResumeRepo();
     setUpATSJob();
-    setUpJobseeker();
+    setUpApplier();
     setUpJobApplication();
     setUpJobApplications();
     setUpJobApplicationManager();
   }
 
-  
+  private void setUpApplier()
+  {
+    applier = new JobApplicationFactory(resumeRepository);
+  }
+
   @Test
-  public void jobseekersForApplicationsToRecruiterJob() throws NullPointerException
+  public void jobseekersForApplicationToRecruiterJob()
   {
     Jobseekers jobseekers = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
     jobseekers.display();
-    assertTrue(application.isAppliedBy(jobseeker));
+    for(Jobseeker applicant : jobseekers){
+      assertTrue(application.wasSubmittedBy(applicant));
+    }
   }
 
   @Test
-  public void jobseekersForApplicationsByDate() throws NullPointerException
+  public void jobseekersForApplicationsByDate()
   {
-    Jobseekers jobseekers = recruiter.applicantsByDate(new Date(), jobApplicationManager);
+    Date date = DateUtils.createDate();
+    Jobseekers jobseekers = recruiter.applicantsByDate(date, jobApplicationManager);
     jobseekers.display();
-    assertTrue(application.isAppliedBy(jobseeker));
+    for(Jobseeker applicant : jobseekers){
+      assertTrue(application.wasSubmittedBy(applicant));
+      assertTrue(application.isAppliedOn(date));
+      assertFalse(application.isAppliedOn(date));
+    }
   }
 
   @Test
-  public void jobseekersForApplicationsByJobAndByDate() throws NullPointerException
+  public void jobseekersForApplicationsByJobAndByDate()
   {
-    Jobseekers jobseekers = recruiter.applicantsByJobAndByDate(recruiterJob, new Date(), jobApplicationManager);
+    Jobseekers jobseekers = recruiter.applicantsByJobAndByDate(recruiterJob, DateUtils.createDate(), jobApplicationManager);
     jobseekers.display();
-    assertTrue(application.isAppliedBy(jobseeker));
+    for(Jobseeker applicant : jobseekers){
+      assertTrue(application.wasSubmittedBy(applicant));
+    }
   }
 
-  public void setUpJobApplications() throws NullPointerException
+  private void setUpJobApplications()
   {
     jobApplications = new JobApplications();
     jobApplications.add(application);
   }
 
-  public void setUpJobApplication()
+  private void setUpJobApplication()
   {
-    application = new JobApplication(jobseeker, recruiterJob, null);
+    application = applier.createApplication(jobseeker, recruiterJob);
   }
 
-  public void setUpJobseeker()
+  private void setUpJobseeker()
   {
     jobseeker = new Jobseeker("Tom");
   }
 
-  public void setUpRecruiter() throws NullPointerException
+  private void setUpRecruiter()
   {
     recruiter = new Recruiter("Ladders");
   }
 
-  public void setUpResumeRepo()
+  private void setUpResumeRepo()
   {
     resumeRepository = new ResumeRepository();
+    resumeRepository.add(jobseeker, new Resume("Resume"));
   }
 
-  public void setUpJobApplicationManager()
+  private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, new Applier(resumeRepository));
+    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository));
   }
 
-  public void setUpATSJob() throws NullPointerException
+  private void setUpATSJob()
   {
     recruiterJob = new RecruiterJob(recruiter, new ATSJob("Software"));
   }

@@ -1,33 +1,40 @@
-package main;
+package main.jobApplication;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import main.jobs.RecruiterJob;
+import main.jobseeker.Jobseeker;
+import main.jobseeker.Jobseekers;
+import main.recruiter.Recruiter;
+
 public class JobApplicationManager
 {
 
   private final JobApplications jobApplications;
-  private final Applier         applier;
+  private final JobApplicationFactory         applicationFactory;
 
   public JobApplicationManager(JobApplications jobApplications,
-                               Applier applier)
+                               JobApplicationFactory applicationFactory)
   {
+    if(this.jobApplications == null) throw new IllegalArgumentException("Job applications cannot be null");
+    if(this.applicationFactory == null) throw new IllegalArgumentException("Application factory cannot be null");
     this.jobApplications = jobApplications;
-    this.applier = applier;
+    this.applicationFactory = applicationFactory;
   }
 
   public JobApplication apply(Jobseeker jobseeker,
-                              RecruiterJob job) throws NullPointerException
+                              RecruiterJob job) throws IllegalArgumentException
   {
     if (job == null)
-      throw new NullPointerException("Job applied to cannot be null");
+      throw new IllegalArgumentException("Job applied to cannot be null");
     if (jobseeker == null)
-      throw new NullPointerException("Jobseeker cannot be null");
-    return submitJobApplication(applier.createApplication(jobseeker, job));
+      throw new IllegalArgumentException("Jobseeker cannot be null");
+    return submitJobApplication(applicationFactory.createApplication(jobseeker, job));
   }
 
-  public JobApplication submitJobApplication(JobApplication jobApplication)
+  private JobApplication submitJobApplication(JobApplication jobApplication)
   {
     return jobApplications.add(jobApplication);
   }
@@ -39,7 +46,6 @@ public class JobApplicationManager
 
   public Jobseekers applications(RecruiterJob recruiterJob)
   {
-    // TODO Auto-generated method stub
     List<Jobseeker> jobseekers = new ArrayList<>();
     for (JobApplication application : jobApplications)
     {
@@ -48,7 +54,7 @@ public class JobApplicationManager
     return new Jobseekers(jobseekers);
   }
 
-  public void addJobseekerIfAppliedFor(RecruiterJob recruiterJob,
+  private void addJobseekerIfAppliedFor(RecruiterJob recruiterJob,
                                        List<Jobseeker> jobseekers,
                                        JobApplication application)
   {
@@ -60,7 +66,6 @@ public class JobApplicationManager
 
   public Jobseekers applications(Date date)
   {
-    // TODO Auto-generated method stub
     List<Jobseeker> jobseekers = new ArrayList<>();
     for (JobApplication application : jobApplications)
     {
@@ -69,7 +74,7 @@ public class JobApplicationManager
     return new Jobseekers(jobseekers);
   }
 
-  public void addJobseekerIfAppliedOn(Date date,
+  private void addJobseekerIfAppliedOn(Date date,
                                         List<Jobseeker> jobseekers,
                                         JobApplication application)
   {
@@ -82,7 +87,6 @@ public class JobApplicationManager
   public Jobseekers applications(RecruiterJob recruiterJob,
                                  Date date)
   {
-    // TODO Auto-generated method stub
     List<Jobseeker> jobseekers = new ArrayList<>();
     for (JobApplication application : jobApplications)
     {
@@ -91,7 +95,7 @@ public class JobApplicationManager
     return new Jobseekers(jobseekers);
   }
 
-  public void addJobseekerIfAppliedForAJobOnAGivenDate(RecruiterJob recruiterJob,
+  private void addJobseekerIfAppliedForAJobOnAGivenDate(RecruiterJob recruiterJob,
                                                        Date date,
                                                        List<Jobseeker> jobseekers,
                                                        JobApplication application)
@@ -112,7 +116,7 @@ public class JobApplicationManager
     return applications.size();
   }
 
-  public void addApplicationIfPostedBy(Recruiter recruiter,
+  private void addApplicationIfPostedBy(Recruiter recruiter,
                                        List<JobApplication> applications,
                                        JobApplication application)
   {
@@ -132,7 +136,7 @@ public class JobApplicationManager
     return applications.size();
   }
 
-  public void addApplicationIfAppliedFor(RecruiterJob recruiterJob,
+  private void addApplicationIfAppliedFor(RecruiterJob recruiterJob,
                                          List<JobApplication> applications,
                                          JobApplication application)
   {

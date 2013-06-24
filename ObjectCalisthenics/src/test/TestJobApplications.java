@@ -2,14 +2,16 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.ATSJob;
-import main.JReqJob;
-import main.JobApplication;
-import main.JobApplications;
-import main.Jobseeker;
-import main.Recruiter;
-import main.RecruiterJob;
-import main.Resume;
+import main.jobApplication.JobApplicationFactory;
+import main.jobApplication.JobApplication;
+import main.jobApplication.JobApplications;
+import main.jobs.ATSJob;
+import main.jobs.JReqJob;
+import main.jobs.RecruiterJob;
+import main.jobseeker.Jobseeker;
+import main.recruiter.Recruiter;
+import main.resume.Resume;
+import main.resume.ResumeRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,17 +19,21 @@ import org.junit.Test;
 public class TestJobApplications
 {
 
-  private JobApplications       jobApplications;
-  private Jobseeker             jobseeker;
-  private Recruiter             recruiter;
-  private Resume                resume;
+  private JobApplications  jobApplications;
+  private Jobseeker        jobseeker;
+  private Recruiter        recruiter;
+  private Resume           resume;
+  private JobApplicationFactory          applier;
+  private ResumeRepository resumeRepository;
 
   @Before
-  public void setUp() throws NullPointerException
+  public void setUp()
   {
     setUpRecruiter();
     setUpJobseeker();
     setUpResume();
+    setUpResumeRepo();
+    setUpApplier();
     setUpJobApplications();
   }
 
@@ -38,17 +44,17 @@ public class TestJobApplications
   }
 
   @Test
-  public void addJobApplication()
+  public void addATSJobApplication()
   {
-    JobApplication jobApplication = new JobApplication(jobseeker, setUpATSJob(), resume);
+    JobApplication jobApplication = applier.createApplication(jobseeker, setUpATSJob());
     jobApplications.add(jobApplication);
     assertTrue(jobApplications.contains(jobApplication));
   }
 
   @Test
-  public void addOneMoreJobApplication()
+  public void addJReqJobApplication()
   {
-    JobApplication jobApplication = new JobApplication(jobseeker, setUpJReqJob(), resume);
+    JobApplication jobApplication = applier.createApplication(jobseeker, setUpJReqJob());
     jobApplications.add(jobApplication);
     assertTrue(jobApplications.contains(jobApplication));
   }
@@ -56,40 +62,52 @@ public class TestJobApplications
   @Test
   public void addTwoJobApplications()
   {
-    JobApplication jobApplication1 = new JobApplication(jobseeker, setUpATSJob(), resume);
-    JobApplication jobApplication2 = new JobApplication(jobseeker, setUpJReqJob(), resume);
+    JobApplication jobApplication1 = applier.createApplication(jobseeker, setUpATSJob());
+    JobApplication jobApplication2 = applier.createApplication(jobseeker, setUpJReqJob());
     jobApplications.add(jobApplication1);
     jobApplications.add(jobApplication2);
+    jobApplications.display();
     assertTrue(jobApplications.contains(jobApplication1));
     assertTrue(jobApplications.contains(jobApplication2));
   }
 
-  public void setUpJobApplications()
+  private void setUpJobApplications()
   {
     jobApplications = new JobApplications();
   }
 
-  public void setUpRecruiter()
+  private void setUpRecruiter()
   {
     recruiter = new Recruiter("Ladders");
   }
 
-  public void setUpJobseeker()
+  private void setUpJobseeker()
   {
     jobseeker = new Jobseeker("Tom");
   }
 
-  public void setUpResume()
+  private void setUpResume()
   {
     resume = new Resume("Resume");
   }
 
-  public RecruiterJob setUpATSJob()
+  private void setUpApplier()
+  {
+    applier = new JobApplicationFactory(resumeRepository);
+  }
+
+  private void setUpResumeRepo()
+  {
+    resumeRepository = new ResumeRepository();
+    resumeRepository.add(jobseeker, resume);
+  }
+
+  private RecruiterJob setUpATSJob()
   {
     return new RecruiterJob(recruiter, new ATSJob("Software"));
   }
 
-  public RecruiterJob setUpJReqJob()
+  private RecruiterJob setUpJReqJob()
   {
     return new RecruiterJob(recruiter, new JReqJob("Software"));
   }

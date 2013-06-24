@@ -2,37 +2,32 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.Jobseeker;
+import main.jobseeker.Jobseeker;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestJobseeker
 {
 
-  private Jobseeker jobseeker;
+  private Jobseeker jobseeker; 
 
-  @Before
-  public void setUp() throws NullPointerException
-  {}
-
-  @Test(expected = Exception.class)
-  public void createJobseekerWithNullName() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createJobseekerWithNullName()
   {
     jobseeker = new Jobseeker(null);
   }
 
-  @Test(expected = Exception.class)
-  public void createJobseekerWithEmptyName() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createJobseekerWithEmptyName() 
   {
     jobseeker = new Jobseeker("");
   }
 
   @Test
-  public void createJobseeker() throws NullPointerException
+  public void createJobseeker()
   {
     jobseeker = new Jobseeker("Tom");
-    assertEquals(new String("Jobseeker :- Tom"), jobseeker.toString());
+    assertEquals("Jobseeker :- Tom", jobseeker.toString());
   }
 
 }

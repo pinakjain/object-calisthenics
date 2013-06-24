@@ -2,13 +2,12 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.ATSJob;
-import main.JReqJob;
-import main.Job;
-import main.Jobs;
-import main.JobsManager;
-import main.Recruiter;
-import main.RecruiterJob;
+import main.jobs.ATSJob;
+import main.jobs.JReqJob;
+import main.jobs.Jobs;
+import main.jobs.JobsManager;
+import main.recruiter.Recruiter;
+import main.jobs.RecruiterJob;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,78 +20,70 @@ public class TestRecruiterJobs
   private Recruiter   recruiter;
 
   @Before
-  public void setUp() throws NullPointerException
+  public void setUp()
   {
     setUpJobs();
     setUpJobsManager();
     setUpRecruiter();
   }
 
-  @Test(expected = Exception.class)
-  public void postNullJob() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void postNullJob()
   {
-    Job job = null;
-    recruiter.postJob(job, jobsManager);
-  }
-
-  @Test(expected = Exception.class)
-  public void postJobHavingNoTitle() throws NullPointerException
-  {
-    Job job = new ATSJob("");
-    recruiter.postJob(job, jobsManager);
+    recruiter.postJob(null, jobsManager);
   }
 
   @Test
-  public void testPostingATSJob() throws NullPointerException
+  public void testPostingATSJob()
   {
     RecruiterJob job = postATSJob();
     jobs.display();
-    assertFalse(job.requiresResume());
+    assertTrue(jobs.contains(job));
   }
 
   @Test
-  public void testPostingJreqJob() throws NullPointerException
+  public void testPostingJreqJob()
   {
     RecruiterJob job = postJreqJob();
     jobs.display();
-    assertTrue(job.requiresResume());
+    assertTrue(jobs.contains(job));
   }
 
   @Test
-  public void numberOfJobsPostedByRecruiter() throws NullPointerException
+  public void jobsPostedByRecruiter()
   {
-    postATSJob();
-    postJreqJob();
+    RecruiterJob job1 = postATSJob();
+    RecruiterJob job2 = postJreqJob();
     Jobs jobs = recruiter.myJobs(jobsManager);
-    jobs.display();
     assertEquals(2, jobs.size());
+    assertTrue(jobs.contains(job1));
+    assertTrue(jobs.contains(job2));
+    jobs.display();
   }
 
-  public void setUpJobsManager()
+  private void setUpJobsManager()
   {
     jobsManager = new JobsManager(jobs);
   }
 
-  public void setUpJobs()
+  private void setUpJobs()
   {
     jobs = new Jobs();
   }
 
-  public void setUpRecruiter() throws NullPointerException
+  private void setUpRecruiter()
   {
     recruiter = new Recruiter("Ladders");
   }
 
-  public RecruiterJob postATSJob() throws NullPointerException
+  private RecruiterJob postATSJob()
   {
-    Job job1 = new ATSJob("Software");
-    return recruiter.postJob(job1, jobsManager);
+    return recruiter.postJob(new ATSJob("Software"), jobsManager);
   }
 
-  public RecruiterJob postJreqJob() throws NullPointerException
+  private RecruiterJob postJreqJob()
   {
-    Job job2 = new JReqJob("Software");
-    return recruiter.postJob(job2, jobsManager);
+    return recruiter.postJob(new JReqJob("Software"), jobsManager);
   }
 
 }

@@ -2,9 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.Recruiter;
+import main.recruiter.Recruiter;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TestRecruiter
@@ -12,26 +11,23 @@ public class TestRecruiter
 
   private Recruiter recruiter;
 
-  @Before
-  public void setUp() throws NullPointerException
-  {}
-
-  @Test(expected = Exception.class)
-  public void createRecruiterWithNullName() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createRecruiterWithNullName()
   {
     recruiter = new Recruiter(null);
   }
 
-  @Test(expected = Exception.class)
-  public void createRecruiterWithEmptyName() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void createRecruiterWithEmptyName() 
   {
     recruiter = new Recruiter("");
   }
 
   @Test
-  public void createRecruiter() throws NullPointerException
+  public void createRecruiter()
   {
     recruiter = new Recruiter("Ladders");
-    assertEquals(new String("Recruiter :- Ladders"), recruiter.toString());
+    recruiter.display();
+    assertEquals("Recruiter :- Ladders", recruiter.toString());
   }
 }

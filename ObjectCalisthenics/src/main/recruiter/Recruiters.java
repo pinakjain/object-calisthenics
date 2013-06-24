@@ -1,4 +1,4 @@
-package main;
+package main.recruiter;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,10 +14,10 @@ public class Recruiters implements Iterable<Recruiter>
     this.recruiters = new ArrayList<>();
   }
 
-  public Recruiter add(Recruiter recruiter) throws NullPointerException
+  public Recruiter add(Recruiter recruiter) throws IllegalArgumentException
   {
     if (recruiter == null)
-      throw new NullPointerException("Recruiter cannot be null");
+      throw new IllegalArgumentException("Recruiter cannot be null");
     recruiters.add(recruiter);
     return recruiter;
   }
@@ -43,7 +43,6 @@ public class Recruiters implements Iterable<Recruiter>
   @Override
   public Iterator<Recruiter> iterator()
   {
-    // TODO Auto-generated method stub
     Iterator<Recruiter> iter = recruiters.iterator();
     return iter;
   }

@@ -1,4 +1,6 @@
-package main;
+package main.jobs;
+
+import main.recruiter.Recruiter;
 
 public class JobsManager
 {
@@ -7,10 +9,11 @@ public class JobsManager
 
   public JobsManager(Jobs jobs)
   {
+    if(jobs == null) throw new IllegalArgumentException("Jobs cannot be null");
     this.jobs = jobs;
   }
 
-  public RecruiterJob postjob(RecruiterJob job) throws NullPointerException
+  public RecruiterJob postjob(RecruiterJob job) throws IllegalArgumentException
   {
     return jobs.add(job);
   }

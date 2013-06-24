@@ -1,42 +1,39 @@
-package main;
+package main.jobs;
+
+import main.utils.IdGenerator;
 
 public class ATSJob implements Job
 {
 
   private final String title;
-  private final int    id;
+  private final JobId    id;
 
-  public ATSJob(String title) throws NullPointerException
+  public ATSJob(String title) throws IllegalArgumentException
   {
     if (title == null)
-      throw new NullPointerException("Title for a job cannot be null");
+      throw new IllegalArgumentException("Title for a job cannot be null");
     if (title.equals(""))
       throw new IllegalArgumentException("Title for a job cannot be empty");
     this.title = title;
-    this.id = IdGenerator.createId();
+    this.id = new JobId(IdGenerator.createId());
   }
 
   @Override
   public boolean requiresResume()
   {
-    // TODO Auto-generated method stub
     return false;
   }
 
   @Override
   public void display()
   {
-    // TODO Auto-generated method stub
     System.out.println("ATS Job :-" + title + " (ID = " + id + ")");
   }
 
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + id;
-    return result;
+    return id.hashCode();
   }
 
   @Override

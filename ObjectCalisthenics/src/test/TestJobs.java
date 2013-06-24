@@ -2,11 +2,11 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.ATSJob;
-import main.JReqJob;
-import main.Jobs;
-import main.Recruiter;
-import main.RecruiterJob;
+import main.jobs.ATSJob;
+import main.jobs.JReqJob;
+import main.jobs.Jobs;
+import main.jobs.RecruiterJob;
+import main.recruiter.Recruiter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class TestJobs
   private Recruiter recruiter;
 
   @Before
-  public void setUp() throws NullPointerException
+  public void setUp()
   {
     setUpJobs();
     setUpRecruiter();
@@ -30,46 +30,78 @@ public class TestJobs
     assertEquals(0, jobs.size());
   }
 
-  @Test(expected = Exception.class)
-  public void addNullJob() throws NullPointerException
+  @Test(expected = IllegalArgumentException.class)
+  public void addNullJob()
   {
     jobs.add(null);
   }
 
   @Test
-  public void addATSJob() throws NullPointerException
+  public void addATSJob()
   {
-    RecruiterJob job = jobs.add(new RecruiterJob(recruiter, new ATSJob("Software")));
+    RecruiterJob job = jobs.add(setUpATSRecruiterJob());
     jobs.display();
     assertTrue(jobs.contains(job));
   }
 
   @Test
-  public void addJreqJob() throws NullPointerException
+  public void addJreqJob()
   {
-    RecruiterJob job = jobs.add(new RecruiterJob(recruiter, new JReqJob("Software")));
+    RecruiterJob job = jobs.add(setUpJReqRecruiterJob());
     jobs.display();
     assertTrue(jobs.contains(job));
   }
 
   @Test
-  public void addJobsWithSameTitle() throws NullPointerException
+  public void addDifferentTypeJobsWithSameTitle()
   {
-    RecruiterJob job1 = jobs.add(new RecruiterJob(recruiter, new JReqJob("Software")));
-    RecruiterJob job2 = jobs.add(new RecruiterJob(recruiter, new ATSJob("Software")));
+    RecruiterJob job1 = jobs.add(setUpJReqRecruiterJob());
+    RecruiterJob job2 = jobs.add(setUpATSRecruiterJob());
     jobs.display();
+    assertFalse(job1.equals(job2));
+    assertTrue(jobs.contains(job1));
+    assertTrue(jobs.contains(job2));
+  }
+  
+  @Test
+  public void addSameTypeJobsWithSameTitle()
+  {
+    RecruiterJob job1 = jobs.add(setUpATSRecruiterJob());
+    RecruiterJob job2 = jobs.add(setUpATSRecruiterJob());
+    jobs.display();
+    assertFalse(job1.equals(job2));
     assertTrue(jobs.contains(job1));
     assertTrue(jobs.contains(job2));
   }
 
-  public void setUpJobs()
+  private RecruiterJob setUpATSRecruiterJob()
+  {
+    return new RecruiterJob(recruiter, setUpATSJob());
+  }
+  
+  private RecruiterJob setUpJReqRecruiterJob()
+  {
+    return new RecruiterJob(recruiter, setUpJReqJob());
+  }
+
+  private void setUpJobs()
   {
     jobs = new Jobs();
   }
 
-  public void setUpRecruiter() throws NullPointerException
+  private void setUpRecruiter()
   {
     recruiter = new Recruiter("Ladders");
+  }
+
+  private ATSJob setUpATSJob()
+  {
+    return new ATSJob("Software");
+  }
+
+  private JReqJob setUpJReqJob()
+  {
+    return new JReqJob("Software");
   }
 
 }
