@@ -8,7 +8,7 @@ public class JReqJob implements Job
   private final String title;
   private final JobId  id;
 
-  public JReqJob(String title) throws IllegalArgumentException
+  public JReqJob(String title)
   {
     if (title == null || title.equals(""))
       throw new IllegalArgumentException("Title for a job cannot be null or empty");
@@ -44,9 +44,7 @@ public class JReqJob implements Job
     if (getClass() != obj.getClass())
       return false;
     JReqJob other = (JReqJob) obj;
-    if (id != other.id)
-      return false;
-    return true;
+    return id.equals(other.id);
   }
 
   @Override
