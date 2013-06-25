@@ -55,7 +55,7 @@ public class TestJobseekers
     jobseekers = new Jobseekers();
   }
   
-  private Jobseeker setUpJobseeker()
+  private static Jobseeker setUpJobseeker()
   {
    return new Jobseeker("Tom");
   }

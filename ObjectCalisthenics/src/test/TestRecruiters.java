@@ -44,7 +44,7 @@ public class TestRecruiters
 
   }
 
-  private Recruiter setUpRecruiter()
+  private static Recruiter setUpRecruiter()
   {
     return new Recruiter("Ladders");
   }

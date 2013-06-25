@@ -65,7 +65,7 @@ public class TestJobseekerJobs
   }
 
   @Test
-  public void multipleJobsAppliedByJobseeker()
+  public void applyToMultipleJobs()
   {
     applyATSJOb();
     applyJReqJob();

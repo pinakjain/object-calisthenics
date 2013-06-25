@@ -40,24 +40,24 @@ public class TestJobseekerSavedJobs
   public void saveATSjob()
   {
     RecruiterJob job = saveATSJob();
-    assertTrue(savedJobs.containsJobSavedByRecruiter(jobseeker, job));
+    assertTrue(savedJobs.containsJobSavedByJobseeker(jobseeker, job));
   }
 
   @Test
   public void saveJReqjob()
   {
     RecruiterJob job = saveJReqJob();
-    assertTrue(savedJobs.containsJobSavedByRecruiter(jobseeker, job));
+    assertTrue(savedJobs.containsJobSavedByJobseeker(jobseeker, job));
   }
 
   @Test
-  public void numberOfJobsSavedByJobseeker()
+  public void testJobsSavedByJobseeker()
   {
     RecruiterJob job1 = saveATSJob();
     RecruiterJob job2 = saveJReqJob();
     jobseeker.viewSavedJobs(savedJobsManager).display();
-    assertTrue(savedJobs.containsJobSavedByRecruiter(jobseeker, job1));
-    assertTrue(savedJobs.containsJobSavedByRecruiter(jobseeker, job2));
+    assertTrue(savedJobs.containsJobSavedByJobseeker(jobseeker, job1));
+    assertTrue(savedJobs.containsJobSavedByJobseeker(jobseeker, job2));
   }
 
   private void setUpSavedJobs()

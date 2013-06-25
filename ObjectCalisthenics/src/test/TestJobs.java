@@ -94,12 +94,12 @@ public class TestJobs
     recruiter = new Recruiter("Ladders");
   }
 
-  private ATSJob setUpATSJob()
+  private static ATSJob setUpATSJob()
   {
     return new ATSJob("Software");
   }
 
-  private JReqJob setUpJReqJob()
+  private static JReqJob setUpJReqJob()
   {
     return new JReqJob("Software");
   }

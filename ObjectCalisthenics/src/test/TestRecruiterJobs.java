@@ -54,8 +54,8 @@ public class TestRecruiterJobs
   {
     RecruiterJob job1 = postATSJob();
     RecruiterJob job2 = postJreqJob();
-    Jobs jobs = recruiter.myJobs(jobsManager);
-    assertEquals(2, jobs.size());
+    Jobs recruiterJobs = recruiter.myJobs(jobsManager);
+    assertEquals(2, recruiterJobs.size());
     assertTrue(jobs.contains(job1));
     assertTrue(jobs.contains(job2));
     jobs.display();

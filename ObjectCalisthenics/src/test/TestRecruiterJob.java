@@ -39,12 +39,12 @@ public class TestRecruiterJob
   }
 
   
-  private Recruiter setUpRecruiter()
+  private static Recruiter setUpRecruiter()
   {
     return new Recruiter("Ladders");
   }
 
-  private ATSJob createATSJob()
+  private static ATSJob createATSJob()
   {
     return new ATSJob("Software");
   }

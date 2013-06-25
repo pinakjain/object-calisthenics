@@ -51,7 +51,7 @@ public class TestRecruiterJobApplications
   }
 
   @Test
-  public void jobseekersForApplicationToRecruiterJob()
+  public void jobseekersWhoHaveAppliedToRecruiterJob()
   {
     Jobseekers jobseekers = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
     jobseekers.display();
@@ -62,7 +62,7 @@ public class TestRecruiterJobApplications
   }
 
   @Test
-  public void jobseekersForApplicationsByDate()
+  public void jobseekersWhoHaveAppliedOnAGivenDate()
   {
     Date date = DateUtils.createDate();
     Jobseekers jobseekers = recruiter.applicantsByDate(date, jobApplicationManager);
@@ -77,7 +77,7 @@ public class TestRecruiterJobApplications
   }
 
   @Test
-  public void jobseekersForApplicationsByJobAndByDate()
+  public void jobseekersWhoHaveAppliedForARecruiterJobOnAGivenDate()
   {
     Jobseekers jobseekers = recruiter.applicantsByJobAndByDate(recruiterJob,
                                                                DateUtils.createDate(),

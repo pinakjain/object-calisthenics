@@ -43,7 +43,7 @@ public class SavedJobs
     return jobs;
   }
 
-  public boolean containsJobSavedByRecruiter(Jobseeker jobseeker,
+  public boolean containsJobSavedByJobseeker(Jobseeker jobseeker,
                                              RecruiterJob recruiterJob)
   {
     return jobsSavedBy(jobseeker).contains(recruiterJob);
