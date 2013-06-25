@@ -12,20 +12,22 @@ import main.recruiter.Recruiter;
 public class JobApplicationManager
 {
 
-  private final JobApplications jobApplications;
-  private final JobApplicationFactory         applicationFactory;
+  private final JobApplications       jobApplications;
+  private final JobApplicationFactory applicationFactory;
 
   public JobApplicationManager(JobApplications jobApplications,
                                JobApplicationFactory applicationFactory)
   {
-    if(this.jobApplications == null) throw new IllegalArgumentException("Job applications cannot be null");
-    if(this.applicationFactory == null) throw new IllegalArgumentException("Application factory cannot be null");
+    if (jobApplications == null)
+      throw new IllegalArgumentException("Job applications cannot be null");
+    if (applicationFactory == null)
+      throw new IllegalArgumentException("Application factory cannot be null");
     this.jobApplications = jobApplications;
     this.applicationFactory = applicationFactory;
   }
 
   public JobApplication apply(Jobseeker jobseeker,
-                              RecruiterJob job) throws IllegalArgumentException
+                              RecruiterJob job)
   {
     if (job == null)
       throw new IllegalArgumentException("Job applied to cannot be null");
@@ -55,12 +57,12 @@ public class JobApplicationManager
   }
 
   private void addJobseekerIfAppliedFor(RecruiterJob recruiterJob,
-                                       List<Jobseeker> jobseekers,
-                                       JobApplication application)
+                                        List<Jobseeker> jobseekers,
+                                        JobApplication application)
   {
     if (application.isAppliedFor(recruiterJob))
     {
-      jobseekers.add(application.applier());
+      jobseekers.add(application.applicant());
     }
   }
 
@@ -75,12 +77,12 @@ public class JobApplicationManager
   }
 
   private void addJobseekerIfAppliedOn(Date date,
-                                        List<Jobseeker> jobseekers,
-                                        JobApplication application)
+                                       List<Jobseeker> jobseekers,
+                                       JobApplication application)
   {
     if (application.isAppliedOn(date))
     {
-      jobseekers.add(application.applier());
+      jobseekers.add(application.applicant());
     }
   }
 
@@ -96,13 +98,13 @@ public class JobApplicationManager
   }
 
   private void addJobseekerIfAppliedForAJobOnAGivenDate(RecruiterJob recruiterJob,
-                                                       Date date,
-                                                       List<Jobseeker> jobseekers,
-                                                       JobApplication application)
+                                                        Date date,
+                                                        List<Jobseeker> jobseekers,
+                                                        JobApplication application)
   {
     if (application.isAppliedFor(recruiterJob) && application.isAppliedOn(date))
     {
-      jobseekers.add(application.applier());
+      jobseekers.add(application.applicant());
     }
   }
 
@@ -117,8 +119,8 @@ public class JobApplicationManager
   }
 
   private void addApplicationIfPostedBy(Recruiter recruiter,
-                                       List<JobApplication> applications,
-                                       JobApplication application)
+                                        List<JobApplication> applications,
+                                        JobApplication application)
   {
     if (application.isPostedBy(recruiter))
     {
@@ -137,12 +139,12 @@ public class JobApplicationManager
   }
 
   private void addApplicationIfAppliedFor(RecruiterJob recruiterJob,
-                                         List<JobApplication> applications,
-                                         JobApplication application)
+                                          List<JobApplication> applications,
+                                          JobApplication application)
   {
     if (application.isAppliedFor(recruiterJob))
     {
       applications.add(application);
     }
-  }  
+  }
 }
