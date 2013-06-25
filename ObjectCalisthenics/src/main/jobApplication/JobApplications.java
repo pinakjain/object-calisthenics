@@ -18,7 +18,8 @@ public class JobApplications implements Iterable<JobApplication>
 
   public JobApplications(List<JobApplication> applications)
   {
-    if(applications == null) throw new IllegalArgumentException("Applications cannot be null");
+    if (applications == null)
+      throw new IllegalArgumentException("Applications cannot be null");
     this.jobApplications = applications;
   }
 
@@ -41,8 +42,8 @@ public class JobApplications implements Iterable<JobApplication>
   }
 
   private void addApplicationIfAppliedBy(Jobseeker jobseeker,
-                                        List<JobApplication> applicationsByJobseeker,
-                                        JobApplication application)
+                                         List<JobApplication> applicationsByJobseeker,
+                                         JobApplication application)
   {
     if (application.wasSubmittedBy(jobseeker))
     {
