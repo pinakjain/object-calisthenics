@@ -18,7 +18,7 @@ public class JobApplication
 
   JobApplication(Jobseeker jobseeker,
                  RecruiterJob job,
-                 Resume resume) throws IllegalArgumentException
+                 Resume resume)
   {
     if (jobseeker == null)
       throw new IllegalArgumentException("Jobseeker cannot be null");
