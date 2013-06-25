@@ -49,7 +49,7 @@ public class JobApplication
 
   public boolean wasAppliedOn(Date applicationDate)
   {
-    return DateUtils.areSameDay(this.date, applicationDate);
+    return DateUtils.areSameDay(date, applicationDate);
   }
 
   public Jobseeker applicant()
