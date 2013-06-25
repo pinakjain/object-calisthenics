@@ -16,7 +16,7 @@ public class Recruiter
   private final String      name;
   private final RecruiterId id;
 
-  public Recruiter(String name) throws IllegalArgumentException
+  public Recruiter(String name)
   {
     if (name == null || name.equals(""))
       throw new IllegalArgumentException("Name cannot be empty or null");
@@ -76,9 +76,7 @@ public class Recruiter
     if (getClass() != obj.getClass())
       return false;
     Recruiter other = (Recruiter) obj;
-    if (id != other.id)
-      return false;
-    return true;
+    return id == other.id;
   }
 
   @Override
