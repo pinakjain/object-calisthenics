@@ -14,7 +14,7 @@ public class Recruiters implements Iterable<Recruiter>
     this.recruiters = new ArrayList<>();
   }
 
-  public Recruiter add(Recruiter recruiter) throws IllegalArgumentException
+  public Recruiter add(Recruiter recruiter)
   {
     if (recruiter == null)
       throw new IllegalArgumentException("Recruiter cannot be null");
