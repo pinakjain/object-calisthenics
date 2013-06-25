@@ -13,14 +13,12 @@ import main.jobseeker.Jobseekers;
 public class Recruiter
 {
 
-  private final String      name;
-  private final RecruiterId id;
+  private final RecruiterName name;
+  private final RecruiterId   id;
 
   public Recruiter(String name)
   {
-    if (name == null || name.equals(""))
-      throw new IllegalArgumentException("Name cannot be empty or null");
-    this.name = name;
+    this.name = new RecruiterName(name);
     this.id = new RecruiterId(IdGenerator.createId());
   }
 

@@ -11,14 +11,12 @@ import main.jobs.SavedJobsManager;
 public class Jobseeker
 {
 
-  private final String      name;
-  private final JobseekerId id;
+  private final JobseekerName name;
+  private final JobseekerId   id;
 
   public Jobseeker(String name)
   {
-    if (name == null || name.equals(""))
-      throw new IllegalArgumentException("Jobseeker name cannot be null or empty");
-    this.name = name;
+    this.name = new JobseekerName(name);
     this.id = new JobseekerId(IdGenerator.createId());
   }
 
