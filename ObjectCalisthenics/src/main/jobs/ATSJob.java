@@ -9,7 +9,7 @@ public class ATSJob implements Job
   public ATSJob(String title)
   {
     this.title = new JobTitle(title);
-    this.id = new JobId();
+    this.id = JobId.createJobId();
   }
 
   @Override

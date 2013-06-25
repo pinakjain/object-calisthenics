@@ -16,7 +16,7 @@ public class Jobseeker
   public Jobseeker(String name)
   {
     this.name = new JobseekerName(name);
-    this.id = new JobseekerId();
+    this.id = JobseekerId.createJobseekerId();
   }
 
   public RecruiterJob save(RecruiterJob recruiterJob,

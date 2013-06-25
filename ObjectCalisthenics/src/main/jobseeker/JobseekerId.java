@@ -33,6 +33,10 @@ public class JobseekerId
   {
     return counter.getAndIncrement();
   }
+  
+  public static JobseekerId createJobseekerId(){
+     return new JobseekerId();
+  }
 
   @Override
   public String toString()

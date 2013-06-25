@@ -9,7 +9,7 @@ public class JReqJob implements Job
   public JReqJob(String title)
   {
     this.title = new JobTitle(title);
-    this.id = new JobId();
+    this.id = JobId.createJobId();
   }
 
   @Override

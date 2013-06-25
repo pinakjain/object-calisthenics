@@ -18,7 +18,7 @@ public class Recruiter
   public Recruiter(String name)
   {
     this.name = new RecruiterName(name);
-    this.id = new RecruiterId();
+    this.id = RecruiterId.createRecruiterId();
   }
 
   public void display()
@@ -71,7 +71,7 @@ public class Recruiter
     if (!(obj instanceof Recruiter))
       return false;
     Recruiter other = (Recruiter) obj;
-    return id == other.id;
+    return id.equals(other.id);
   }
 
   @Override

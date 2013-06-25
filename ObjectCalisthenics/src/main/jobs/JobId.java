@@ -33,7 +33,11 @@ public class JobId
   {
     return counter.getAndIncrement();
   }
-
+  
+  public static JobId createJobId(){
+    return new JobId();
+ }
+  
   @Override
   public String toString()
   {
