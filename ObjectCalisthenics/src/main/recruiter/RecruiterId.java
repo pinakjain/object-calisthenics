@@ -1,12 +1,15 @@
 package main.recruiter;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class RecruiterId
 {
-  private int id;
+  private int                  id;
+  private static AtomicInteger counter = new AtomicInteger(0);
 
-  public RecruiterId(int id)
+  public RecruiterId()
   {
-    this.id = id;
+    this.id = nextId();
   }
 
   @Override
@@ -28,4 +31,14 @@ public class RecruiterId
     return id == other.id;
   }
 
+  private static int nextId()
+  {
+    return counter.getAndIncrement();
+  }
+
+  @Override
+  public String toString()
+  {
+    return String.valueOf(id);
+  }
 }

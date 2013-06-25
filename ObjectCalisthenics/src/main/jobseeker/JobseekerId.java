@@ -1,12 +1,15 @@
 package main.jobseeker;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class JobseekerId
 {
-  private int id;
+  private int                  id;
+  private static AtomicInteger counter = new AtomicInteger(0);
 
-  public JobseekerId(int id)
+  public JobseekerId()
   {
-    this.id = id;
+    this.id = nextId();
   }
 
   @Override
@@ -26,5 +29,16 @@ public class JobseekerId
       return false;
     JobseekerId other = (JobseekerId) obj;
     return id == other.id;
+  }
+
+  private static int nextId()
+  {
+    return counter.getAndIncrement();
+  }
+
+  @Override
+  public String toString()
+  {
+    return String.valueOf(id);
   }
 }

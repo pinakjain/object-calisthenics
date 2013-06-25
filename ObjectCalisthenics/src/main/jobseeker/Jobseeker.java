@@ -1,6 +1,5 @@
 package main.jobseeker;
 
-import main.utils.IdGenerator;
 import main.jobApplication.JobApplication;
 import main.jobApplication.JobApplicationManager;
 import main.jobApplication.JobApplications;
@@ -17,7 +16,7 @@ public class Jobseeker
   public Jobseeker(String name)
   {
     this.name = new JobseekerName(name);
-    this.id = new JobseekerId(IdGenerator.createId());
+    this.id = new JobseekerId();
   }
 
   public RecruiterJob save(RecruiterJob recruiterJob,

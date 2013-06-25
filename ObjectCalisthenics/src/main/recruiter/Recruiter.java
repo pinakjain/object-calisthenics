@@ -2,7 +2,6 @@ package main.recruiter;
 
 import java.util.Date;
 
-import main.utils.IdGenerator;
 import main.jobApplication.JobApplicationManager;
 import main.jobs.Job;
 import main.jobs.Jobs;
@@ -19,7 +18,7 @@ public class Recruiter
   public Recruiter(String name)
   {
     this.name = new RecruiterName(name);
-    this.id = new RecruiterId(IdGenerator.createId());
+    this.id = new RecruiterId();
   }
 
   public void display()

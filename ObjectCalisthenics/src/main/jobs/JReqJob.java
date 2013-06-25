@@ -1,7 +1,5 @@
 package main.jobs;
 
-import main.utils.IdGenerator;
-
 public class JReqJob implements Job
 {
 
@@ -11,7 +9,7 @@ public class JReqJob implements Job
   public JReqJob(String title)
   {
     this.title = new JobTitle(title);
-    this.id = new JobId(IdGenerator.createId());
+    this.id = new JobId();
   }
 
   @Override
