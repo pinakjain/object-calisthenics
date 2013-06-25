@@ -14,7 +14,7 @@ public class Jobseeker
   private final String      name;
   private final JobseekerId id;
 
-  public Jobseeker(String name) throws IllegalArgumentException
+  public Jobseeker(String name)
   {
     if (name == null || name.equals(""))
       throw new IllegalArgumentException("Jobseeker name cannot be null or empty");
@@ -65,9 +65,7 @@ public class Jobseeker
     if (getClass() != obj.getClass())
       return false;
     Jobseeker other = (Jobseeker) obj;
-    if (id != other.id)
-      return false;
-    return true;
+    return id.equals(other.id);
   }
 
   @Override
