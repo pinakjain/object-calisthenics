@@ -24,7 +24,7 @@ public class TestLaddersJobApplications
   private RecruiterJob          recruiterJob;
   private Jobseeker             jobseeker1;
   private Jobseeker             jobseeker2;
-  private JobApplicationFactory               applier;
+  private JobApplicationFactory factory;
 
   @Before
   public void setUp()
@@ -33,14 +33,14 @@ public class TestLaddersJobApplications
     setUpJobseeker();
     setUpResumeRepo();
     setUpATSJob();
-    setUpApplier();
+    setUpFactory();
     setUpJobApplications();
     setUpJobApplicationManager();
   }
 
-  private void setUpApplier()
+  private void setUpFactory()
   {
-    applier = new JobApplicationFactory(resumeRepository);
+    factory = new JobApplicationFactory(resumeRepository);
   }
 
   @Test
@@ -58,8 +58,8 @@ public class TestLaddersJobApplications
   private void setUpJobApplications()
   {
     jobApplications = new JobApplications();
-    jobApplications.add(applier.createApplication(jobseeker1, recruiterJob));
-    jobApplications.add(applier.createApplication(jobseeker2, recruiterJob));
+    jobApplications.add(factory.createApplication(jobseeker1, recruiterJob));
+    jobApplications.add(factory.createApplication(jobseeker2, recruiterJob));
   }
 
   private void setUpJobseeker()

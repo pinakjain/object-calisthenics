@@ -30,7 +30,7 @@ public class TestRecruiterJobApplications
   private RecruiterJob          recruiterJob;
   private JobApplication        application;
   private Jobseeker             jobseeker;
-  private JobApplicationFactory               applier;
+  private JobApplicationFactory factory;
 
   @Before
   public void setUp()
@@ -39,15 +39,15 @@ public class TestRecruiterJobApplications
     setUpJobseeker();
     setUpResumeRepo();
     setUpATSJob();
-    setUpApplier();
+    setUpFactory();
     setUpJobApplication();
     setUpJobApplications();
     setUpJobApplicationManager();
   }
 
-  private void setUpApplier()
+  private void setUpFactory()
   {
-    applier = new JobApplicationFactory(resumeRepository);
+    factory = new JobApplicationFactory(resumeRepository);
   }
 
   @Test
@@ -55,7 +55,8 @@ public class TestRecruiterJobApplications
   {
     Jobseekers jobseekers = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
     jobseekers.display();
-    for(Jobseeker applicant : jobseekers){
+    for (Jobseeker applicant : jobseekers)
+    {
       assertTrue(application.wasSubmittedBy(applicant));
     }
   }
@@ -66,19 +67,24 @@ public class TestRecruiterJobApplications
     Date date = DateUtils.createDate();
     Jobseekers jobseekers = recruiter.applicantsByDate(date, jobApplicationManager);
     jobseekers.display();
-    for(Jobseeker applicant : jobseekers){
+    for (Jobseeker applicant : jobseekers)
+    {
       assertTrue(application.wasSubmittedBy(applicant));
       assertTrue(application.isAppliedOn(date));
-      assertFalse(application.isAppliedOn(date));
+      // TO-DO implement for a different date
+      // assertFalse(application.isAppliedOn(date));
     }
   }
 
   @Test
   public void jobseekersForApplicationsByJobAndByDate()
   {
-    Jobseekers jobseekers = recruiter.applicantsByJobAndByDate(recruiterJob, DateUtils.createDate(), jobApplicationManager);
+    Jobseekers jobseekers = recruiter.applicantsByJobAndByDate(recruiterJob,
+                                                               DateUtils.createDate(),
+                                                               jobApplicationManager);
     jobseekers.display();
-    for(Jobseeker applicant : jobseekers){
+    for (Jobseeker applicant : jobseekers)
+    {
       assertTrue(application.wasSubmittedBy(applicant));
     }
   }
@@ -91,7 +97,7 @@ public class TestRecruiterJobApplications
 
   private void setUpJobApplication()
   {
-    application = applier.createApplication(jobseeker, recruiterJob);
+    application = factory.createApplication(jobseeker, recruiterJob);
   }
 
   private void setUpJobseeker()

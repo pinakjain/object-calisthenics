@@ -23,7 +23,7 @@ public class TestJobApplications
   private Jobseeker        jobseeker;
   private Recruiter        recruiter;
   private Resume           resume;
-  private JobApplicationFactory          applier;
+  private JobApplicationFactory          factory;
   private ResumeRepository resumeRepository;
 
   @Before
@@ -33,7 +33,7 @@ public class TestJobApplications
     setUpJobseeker();
     setUpResume();
     setUpResumeRepo();
-    setUpApplier();
+    setUpFactory();
     setUpJobApplications();
   }
 
@@ -46,7 +46,7 @@ public class TestJobApplications
   @Test
   public void addATSJobApplication()
   {
-    JobApplication jobApplication = applier.createApplication(jobseeker, setUpATSJob());
+    JobApplication jobApplication = factory.createApplication(jobseeker, setUpATSJob());
     jobApplications.add(jobApplication);
     assertTrue(jobApplications.contains(jobApplication));
   }
@@ -54,7 +54,7 @@ public class TestJobApplications
   @Test
   public void addJReqJobApplication()
   {
-    JobApplication jobApplication = applier.createApplication(jobseeker, setUpJReqJob());
+    JobApplication jobApplication = factory.createApplication(jobseeker, setUpJReqJob());
     jobApplications.add(jobApplication);
     assertTrue(jobApplications.contains(jobApplication));
   }
@@ -62,8 +62,8 @@ public class TestJobApplications
   @Test
   public void addTwoJobApplications()
   {
-    JobApplication jobApplication1 = applier.createApplication(jobseeker, setUpATSJob());
-    JobApplication jobApplication2 = applier.createApplication(jobseeker, setUpJReqJob());
+    JobApplication jobApplication1 = factory.createApplication(jobseeker, setUpATSJob());
+    JobApplication jobApplication2 = factory.createApplication(jobseeker, setUpJReqJob());
     jobApplications.add(jobApplication1);
     jobApplications.add(jobApplication2);
     jobApplications.display();
@@ -91,9 +91,9 @@ public class TestJobApplications
     resume = new Resume("Resume");
   }
 
-  private void setUpApplier()
+  private void setUpFactory()
   {
-    applier = new JobApplicationFactory(resumeRepository);
+    factory = new JobApplicationFactory(resumeRepository);
   }
 
   private void setUpResumeRepo()
