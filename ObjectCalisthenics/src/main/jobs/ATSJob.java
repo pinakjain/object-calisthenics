@@ -8,7 +8,7 @@ public class ATSJob implements Job
   private final String title;
   private final JobId    id;
 
-  public ATSJob(String title) throws IllegalArgumentException
+  public ATSJob(String title)
   {
     if (title == null)
       throw new IllegalArgumentException("Title for a job cannot be null");
@@ -46,9 +46,7 @@ public class ATSJob implements Job
     if (getClass() != obj.getClass())
       return false;
     ATSJob other = (ATSJob) obj;
-    if (id != other.id)
-      return false;
-    return true;
+    return id.equals(other.id);
   }
 
   @Override
