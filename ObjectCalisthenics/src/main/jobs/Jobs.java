@@ -21,7 +21,7 @@ public class Jobs implements Iterable<RecruiterJob>
     this.jobs = jobs;
   }
 
-  public RecruiterJob add(RecruiterJob job) throws IllegalArgumentException
+  public RecruiterJob add(RecruiterJob job)
   {
     if (job == null)
       throw new IllegalArgumentException("Job needed to be added cannot be null");
@@ -39,7 +39,7 @@ public class Jobs implements Iterable<RecruiterJob>
 
   public Jobs jobPostingsBy(Recruiter recruiter)
   {
-    List<RecruiterJob> jobPostings = new ArrayList<RecruiterJob>();
+    List<RecruiterJob> jobPostings = new ArrayList<>();
     for (RecruiterJob job : jobs)
     {
       addJobIfPostedBy(recruiter, jobPostings, job);
@@ -48,8 +48,8 @@ public class Jobs implements Iterable<RecruiterJob>
   }
 
   private void addJobIfPostedBy(Recruiter recruiter,
-                               List<RecruiterJob> jobPostings,
-                               RecruiterJob job)
+                                List<RecruiterJob> jobPostings,
+                                RecruiterJob job)
   {
     if (job.isPostedBy(recruiter))
     {
