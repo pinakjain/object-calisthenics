@@ -1,7 +1,5 @@
 package main.jobs;
 
-import main.jobApplication.JobApplication;
-
 public class JReqJob implements Job
 {
 

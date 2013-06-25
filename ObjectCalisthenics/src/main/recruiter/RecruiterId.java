@@ -2,8 +2,6 @@ package main.recruiter;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import main.jobApplication.JobApplication;
-
 public class RecruiterId
 {
   private int                  id;

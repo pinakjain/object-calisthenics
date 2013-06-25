@@ -32,14 +32,14 @@ public class JobApplication
     this.date = DateUtils.createDate();
   }
 
-  public boolean wasSubmittedBy(Jobseeker jobseeker)
+  public boolean wasSubmittedBy(Jobseeker seeker)
   {
-    return this.jobseeker.equals(jobseeker);
+    return jobseeker.equals(seeker);
   }
 
-  public boolean wasAppliedFor(RecruiterJob job)
+  public boolean wasAppliedFor(RecruiterJob recruiterJob)
   {
-    return this.job.equals(job);
+    return job.equals(recruiterJob);
   }
 
   public boolean forJobPostedBy(Recruiter recruiter)
@@ -47,14 +47,14 @@ public class JobApplication
     return job.isPostedBy(recruiter);
   }
 
-  public boolean wasAppliedOn(Date date)
+  public boolean wasAppliedOn(Date applicationDate)
   {
-    return DateUtils.areSameDay(this.date, date);
+    return DateUtils.areSameDay(this.date, applicationDate);
   }
 
   public Jobseeker applicant()
   {
-    return this.jobseeker;
+    return jobseeker;
   }
 
   public void display()
@@ -64,7 +64,7 @@ public class JobApplication
 
   public boolean hasResume()
   {
-    return this.resume != null;
+    return resume != null;
   }
 
   @Override

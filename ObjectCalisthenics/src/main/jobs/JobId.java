@@ -2,8 +2,6 @@ package main.jobs;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import main.jobApplication.JobApplication;
-
 public class JobId
 {
   private int                  id;

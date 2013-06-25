@@ -56,7 +56,7 @@ public class JobApplicationManager
     return new Jobseekers(jobseekers);
   }
 
-  private void addJobseekerIfAppliedFor(RecruiterJob recruiterJob,
+  private static void addJobseekerIfAppliedFor(RecruiterJob recruiterJob,
                                         List<Jobseeker> jobseekers,
                                         JobApplication application)
   {
@@ -76,7 +76,7 @@ public class JobApplicationManager
     return new Jobseekers(jobseekers);
   }
 
-  private void addJobseekerIfAppliedOn(Date date,
+  private static void addJobseekerIfAppliedOn(Date date,
                                        List<Jobseeker> jobseekers,
                                        JobApplication application)
   {
@@ -97,7 +97,7 @@ public class JobApplicationManager
     return new Jobseekers(jobseekers);
   }
 
-  private void addJobseekerIfAppliedForAJobOnAGivenDate(RecruiterJob recruiterJob,
+  private static void addJobseekerIfAppliedForAJobOnAGivenDate(RecruiterJob recruiterJob,
                                                         Date date,
                                                         List<Jobseeker> jobseekers,
                                                         JobApplication application)
@@ -118,7 +118,7 @@ public class JobApplicationManager
     return applications.size();
   }
 
-  private void addApplicationIfPostedBy(Recruiter recruiter,
+  private static void addApplicationIfPostedBy(Recruiter recruiter,
                                         List<JobApplication> applications,
                                         JobApplication application)
   {
@@ -138,7 +138,7 @@ public class JobApplicationManager
     return applications.size();
   }
 
-  private void addApplicationIfAppliedFor(RecruiterJob recruiterJob,
+  private static void addApplicationIfAppliedFor(RecruiterJob recruiterJob,
                                           List<JobApplication> applications,
                                           JobApplication application)
   {

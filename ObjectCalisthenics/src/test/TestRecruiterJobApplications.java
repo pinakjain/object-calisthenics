@@ -71,7 +71,7 @@ public class TestRecruiterJobApplications
     {
       assertTrue(application.wasSubmittedBy(applicant));
       assertTrue(application.wasAppliedOn(date));
-      // TO-DO implement for a different date
+      // TODO implement for a different date
       // assertFalse(application.isAppliedOn(date));
     }
   }

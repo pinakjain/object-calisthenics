@@ -47,7 +47,7 @@ public class Jobs implements Iterable<RecruiterJob>
     return new Jobs(jobPostings);
   }
 
-  private void addJobIfPostedBy(Recruiter recruiter,
+  private static void addJobIfPostedBy(Recruiter recruiter,
                                 List<RecruiterJob> jobPostings,
                                 RecruiterJob job)
   {

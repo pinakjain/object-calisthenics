@@ -2,7 +2,6 @@ package main.recruiter;
 
 import java.util.Date;
 
-import main.jobApplication.JobApplication;
 import main.jobApplication.JobApplicationManager;
 import main.jobs.Job;
 import main.jobs.Jobs;

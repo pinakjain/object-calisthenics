@@ -1,6 +1,5 @@
 package main.jobs;
 
-import main.jobApplication.JobApplication;
 import main.recruiter.Recruiter;
 
 public class RecruiterJob
@@ -10,7 +9,7 @@ public class RecruiterJob
   private final Job       job;
 
   public RecruiterJob(Recruiter recruiter,
-                      Job job) throws IllegalArgumentException
+                      Job job)
   {
     if (recruiter == null)
       throw new IllegalArgumentException("Recruiter cannot be null");
@@ -20,9 +19,9 @@ public class RecruiterJob
     this.job = job;
   }
 
-  public boolean isPostedBy(Recruiter recruiter)
+  public boolean isPostedBy(Recruiter rec)
   {
-    return this.recruiter.equals(recruiter);
+    return recruiter.equals(rec);
   }
 
   public void display()

@@ -41,7 +41,7 @@ public class JobApplications implements Iterable<JobApplication>
     return new JobApplications(applicationsByJobseeker);
   }
 
-  private void addApplicationIfAppliedBy(Jobseeker jobseeker,
+  private static void addApplicationIfAppliedBy(Jobseeker jobseeker,
                                          List<JobApplication> applicationsByJobseeker,
                                          JobApplication application)
   {
