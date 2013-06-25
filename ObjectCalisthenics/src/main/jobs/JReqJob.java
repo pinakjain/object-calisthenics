@@ -5,14 +5,12 @@ import main.utils.IdGenerator;
 public class JReqJob implements Job
 {
 
-  private final String title;
+  private final JobTitle title;
   private final JobId  id;
 
   public JReqJob(String title)
   {
-    if (title == null || title.equals(""))
-      throw new IllegalArgumentException("Title for a job cannot be null or empty");
-    this.title = title;
+    this.title = new JobTitle(title);
     this.id = new JobId(IdGenerator.createId());
   }
 

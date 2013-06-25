@@ -5,16 +5,12 @@ import main.utils.IdGenerator;
 public class ATSJob implements Job
 {
 
-  private final String title;
+  private final JobTitle title;
   private final JobId    id;
 
   public ATSJob(String title)
   {
-    if (title == null)
-      throw new IllegalArgumentException("Title for a job cannot be null");
-    if (title.equals(""))
-      throw new IllegalArgumentException("Title for a job cannot be empty");
-    this.title = title;
+    this.title = new JobTitle(title);
     this.id = new JobId(IdGenerator.createId());
   }
 
