@@ -22,7 +22,7 @@ public class JobApplications implements Iterable<JobApplication>
     this.jobApplications = applications;
   }
 
-  public JobApplication add(JobApplication jobApplication) throws IllegalArgumentException
+  public JobApplication add(JobApplication jobApplication)
   {
     if (jobApplication == null)
       throw new IllegalArgumentException("Job application cannot be null");
