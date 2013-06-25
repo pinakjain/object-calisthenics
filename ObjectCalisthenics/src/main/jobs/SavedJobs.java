@@ -12,11 +12,11 @@ public class SavedJobs
 
   public SavedJobs()
   {
-    this.savedJobs = new HashMap<Jobseeker, Jobs>();
+    this.savedJobs = new HashMap<>();
   }
 
   public RecruiterJob add(Jobseeker jobseeker,
-                          RecruiterJob recruiterJob) throws IllegalArgumentException
+                          RecruiterJob recruiterJob)
   {
     if (recruiterJob == null)
       throw new IllegalArgumentException("Job to be saved cannot be null");
@@ -32,7 +32,7 @@ public class SavedJobs
   }
 
   private Jobs addJobToTheSavedJobsForJobbseeker(Jobseeker jobseeker,
-                                                RecruiterJob recruiterJob) throws IllegalArgumentException
+                                                 RecruiterJob recruiterJob) throws IllegalArgumentException
   {
     Jobs jobs = new Jobs();
     if (savedJobs.get(jobseeker) != null)
