@@ -11,7 +11,8 @@ public class JobApplicationFactory
 
   public JobApplicationFactory(ResumeRepository resumeRepository)
   {
-    if(this.resumeRepository == null) throw new IllegalArgumentException("Resume repository cannot be null");
+    if (resumeRepository == null)
+      throw new IllegalArgumentException("Resume repository cannot be null");
     this.resumeRepository = resumeRepository;
   }
 
