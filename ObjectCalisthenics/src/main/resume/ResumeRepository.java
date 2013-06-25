@@ -12,11 +12,11 @@ public class ResumeRepository
 
   public ResumeRepository()
   {
-    this.resumeRepo = new HashMap<Jobseeker, Resume>();
+    this.resumeRepo = new HashMap<>();
   }
 
   public void add(Jobseeker jobseeker,
-                  Resume resume) throws IllegalArgumentException
+                  Resume resume)
   {
     if (jobseeker == null)
       throw new IllegalArgumentException("Jobseeker cannot be null");
