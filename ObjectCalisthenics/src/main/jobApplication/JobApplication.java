@@ -34,20 +34,12 @@ public class JobApplication
 
   public boolean wasSubmittedBy(Jobseeker jobseeker)
   {
-    if (this.jobseeker == jobseeker)
-    {
-      return true;
-    }
-    return false;
+    return this.jobseeker.equals(jobseeker);
   }
 
   public boolean isAppliedFor(RecruiterJob job)
   {
-    if (this.job == job)
-    {
-      return true;
-    }
-    return false;
+    return this.job.equals(job);
   }
 
   public boolean isPostedBy(Recruiter recruiter)
@@ -72,11 +64,7 @@ public class JobApplication
 
   public boolean hasResume()
   {
-    if (this.resume == null)
-    {
-      return false;
-    }
-    return true;
+    return this.resume != null;
   }
 
   @Override

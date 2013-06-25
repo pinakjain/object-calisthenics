@@ -21,11 +21,7 @@ public class RecruiterJob
 
   public boolean isPostedBy(Recruiter recruiter)
   {
-    if (this.recruiter.equals(recruiter))
-    {
-      return true;
-    }
-    return false;
+    return this.recruiter.equals(recruiter);
   }
 
   public void display()
