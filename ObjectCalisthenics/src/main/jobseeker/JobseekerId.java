@@ -12,10 +12,7 @@ public class JobseekerId
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + id;
-    return result;
+    return 31 + id;
   }
 
   @Override
@@ -28,8 +25,6 @@ public class JobseekerId
     if (getClass() != obj.getClass())
       return false;
     JobseekerId other = (JobseekerId) obj;
-    if (id != other.id)
-      return false;
-    return true;
+    return id == other.id;
   }
 }
