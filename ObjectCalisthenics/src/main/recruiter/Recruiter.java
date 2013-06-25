@@ -42,20 +42,20 @@ public class Recruiter
   public Jobseekers applicantsByJob(RecruiterJob recruiterJob,
                                     JobApplicationManager jobApplicationManager)
   {
-    return jobApplicationManager.applications(recruiterJob);
+    return jobApplicationManager.applicationsFor(recruiterJob);
   }
 
   public Jobseekers applicantsByDate(Date date,
                                      JobApplicationManager jobApplicationManager)
   {
-    return jobApplicationManager.applications(date);
+    return jobApplicationManager.applicationsFor(date);
   }
 
   public Jobseekers applicantsByJobAndByDate(RecruiterJob recruiterJob,
                                              Date date,
                                              JobApplicationManager jobApplicationManager)
   {
-    return jobApplicationManager.applications(recruiterJob, date);
+    return jobApplicationManager.applicationsFor(recruiterJob, date);
   }
 
   @Override

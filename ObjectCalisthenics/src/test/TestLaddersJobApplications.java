@@ -46,13 +46,13 @@ public class TestLaddersJobApplications
   @Test
   public void numberOfApplicationsForRecruiterJob()
   {
-    assertEquals(2, jobApplicationManager.numberOfApplicationForJob(recruiterJob));
+    assertEquals(2, jobApplicationManager.numberOfApplicationsForJob(recruiterJob));
   }
 
   @Test
   public void numberOfApplicationsForRecruiter()
   {
-    assertEquals(2, jobApplicationManager.numberOfApplicationForRecruiter(recruiter));
+    assertEquals(2, jobApplicationManager.numberOfApplicationsForRecruiter(recruiter));
   }
 
   private void setUpJobApplications()

@@ -46,7 +46,7 @@ public class JobApplicationManager
     return jobApplications.jobsAppliedBy(jobseeker);
   }
 
-  public Jobseekers applications(RecruiterJob recruiterJob)
+  public Jobseekers applicationsFor(RecruiterJob recruiterJob)
   {
     List<Jobseeker> jobseekers = new ArrayList<>();
     for (JobApplication application : jobApplications)
@@ -60,13 +60,13 @@ public class JobApplicationManager
                                         List<Jobseeker> jobseekers,
                                         JobApplication application)
   {
-    if (application.isAppliedFor(recruiterJob))
+    if (application.wasAppliedFor(recruiterJob))
     {
       jobseekers.add(application.applicant());
     }
   }
 
-  public Jobseekers applications(Date date)
+  public Jobseekers applicationsFor(Date date)
   {
     List<Jobseeker> jobseekers = new ArrayList<>();
     for (JobApplication application : jobApplications)
@@ -80,13 +80,13 @@ public class JobApplicationManager
                                        List<Jobseeker> jobseekers,
                                        JobApplication application)
   {
-    if (application.isAppliedOn(date))
+    if (application.wasAppliedOn(date))
     {
       jobseekers.add(application.applicant());
     }
   }
 
-  public Jobseekers applications(RecruiterJob recruiterJob,
+  public Jobseekers applicationsFor(RecruiterJob recruiterJob,
                                  Date date)
   {
     List<Jobseeker> jobseekers = new ArrayList<>();
@@ -102,13 +102,13 @@ public class JobApplicationManager
                                                         List<Jobseeker> jobseekers,
                                                         JobApplication application)
   {
-    if (application.isAppliedFor(recruiterJob) && application.isAppliedOn(date))
+    if (application.wasAppliedFor(recruiterJob) && application.wasAppliedOn(date))
     {
       jobseekers.add(application.applicant());
     }
   }
 
-  public int numberOfApplicationForRecruiter(Recruiter recruiter)
+  public int numberOfApplicationsForRecruiter(Recruiter recruiter)
   {
     List<JobApplication> applications = new ArrayList<>();
     for (JobApplication application : jobApplications)
@@ -122,13 +122,13 @@ public class JobApplicationManager
                                         List<JobApplication> applications,
                                         JobApplication application)
   {
-    if (application.isPostedBy(recruiter))
+    if (application.forJobPostedBy(recruiter))
     {
       applications.add(application);
     }
   }
 
-  public int numberOfApplicationForJob(RecruiterJob recruiterJob)
+  public int numberOfApplicationsForJob(RecruiterJob recruiterJob)
   {
     List<JobApplication> applications = new ArrayList<>();
     for (JobApplication application : jobApplications)
@@ -142,7 +142,7 @@ public class JobApplicationManager
                                           List<JobApplication> applications,
                                           JobApplication application)
   {
-    if (application.isAppliedFor(recruiterJob))
+    if (application.wasAppliedFor(recruiterJob))
     {
       applications.add(application);
     }

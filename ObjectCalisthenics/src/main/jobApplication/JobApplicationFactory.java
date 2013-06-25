@@ -21,18 +21,18 @@ public class JobApplicationFactory
   {
     if (job.requiresResume())
     {
-      return applyUsingResume(jobseeker, job);
+      return applicationUsingResume(jobseeker, job);
     }
-    return applyWithoutResume(jobseeker, job);
+    return applicationWithoutResume(jobseeker, job);
   }
 
-  public JobApplication applyUsingResume(Jobseeker jobseeker,
+  public JobApplication applicationUsingResume(Jobseeker jobseeker,
                                          RecruiterJob job) throws IllegalArgumentException
   {
     return new JobApplication(jobseeker, job, resumeRepository.getResume(jobseeker));
   }
 
-  public JobApplication applyWithoutResume(Jobseeker jobseeker,
+  public JobApplication applicationWithoutResume(Jobseeker jobseeker,
                                            RecruiterJob job) throws IllegalArgumentException
   {
     return new JobApplication(jobseeker, job, null);

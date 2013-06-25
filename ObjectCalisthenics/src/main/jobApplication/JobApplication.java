@@ -37,17 +37,17 @@ public class JobApplication
     return this.jobseeker.equals(jobseeker);
   }
 
-  public boolean isAppliedFor(RecruiterJob job)
+  public boolean wasAppliedFor(RecruiterJob job)
   {
     return this.job.equals(job);
   }
 
-  public boolean isPostedBy(Recruiter recruiter)
+  public boolean forJobPostedBy(Recruiter recruiter)
   {
     return job.isPostedBy(recruiter);
   }
 
-  public boolean isAppliedOn(Date date)
+  public boolean wasAppliedOn(Date date)
   {
     return DateUtils.areSameDay(this.date, date);
   }
