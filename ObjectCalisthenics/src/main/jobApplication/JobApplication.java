@@ -17,8 +17,8 @@ public class JobApplication
   private final Date         date;
 
   JobApplication(Jobseeker jobseeker,
-                        RecruiterJob job,
-                        Resume resume) throws IllegalArgumentException
+                 RecruiterJob job,
+                 Resume resume) throws IllegalArgumentException
   {
     if (jobseeker == null)
       throw new IllegalArgumentException("Jobseeker cannot be null");
@@ -60,7 +60,7 @@ public class JobApplication
     return DateUtils.areSameDay(this.date, date);
   }
 
-  public Jobseeker applier()
+  public Jobseeker applicant()
   {
     return this.jobseeker;
   }
@@ -80,6 +80,12 @@ public class JobApplication
   }
 
   @Override
+  public int hashCode()
+  {
+    return job.hashCode() + jobseeker.hashCode() + date.hashCode();
+  }
+
+  @Override
   public boolean equals(Object obj)
   {
     if (this == obj)
@@ -91,4 +97,5 @@ public class JobApplication
     JobApplication other = (JobApplication) obj;
     return job.equals(other.job) && jobseeker.equals(other.jobseeker) && date.equals(other.date);
   }
+
 }
