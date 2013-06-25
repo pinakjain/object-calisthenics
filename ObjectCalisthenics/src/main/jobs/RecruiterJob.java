@@ -57,4 +57,10 @@ public class RecruiterJob
     return job + " posted by " + recruiter;
   }
 
+  @Override
+  public int hashCode()
+  {
+    return job.hashCode() + recruiter.hashCode();
+  }
+
 }
