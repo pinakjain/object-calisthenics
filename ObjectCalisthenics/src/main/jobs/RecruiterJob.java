@@ -1,5 +1,6 @@
 package main.jobs;
 
+import main.jobApplication.JobApplication;
 import main.recruiter.Recruiter;
 
 public class RecruiterJob
@@ -39,9 +40,7 @@ public class RecruiterJob
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
+    if (!(obj instanceof RecruiterJob))
       return false;
     RecruiterJob other = (RecruiterJob) obj;
     return job.equals(other.job) && recruiter.equals(other.recruiter);

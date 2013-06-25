@@ -2,6 +2,7 @@ package main.recruiter;
 
 import java.util.Date;
 
+import main.jobApplication.JobApplication;
 import main.jobApplication.JobApplicationManager;
 import main.jobs.Job;
 import main.jobs.Jobs;
@@ -68,9 +69,7 @@ public class Recruiter
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
+    if (!(obj instanceof Recruiter))
       return false;
     Recruiter other = (Recruiter) obj;
     return id == other.id;

@@ -35,9 +35,7 @@ public class ATSJob implements Job
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
+    if (!(obj instanceof ATSJob))
       return false;
     ATSJob other = (ATSJob) obj;
     return id.equals(other.id);

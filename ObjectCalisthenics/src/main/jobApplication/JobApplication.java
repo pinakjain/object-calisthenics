@@ -78,9 +78,7 @@ public class JobApplication
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
+    if (!(obj instanceof JobApplication))
       return false;
     JobApplication other = (JobApplication) obj;
     return job.equals(other.job) && jobseeker.equals(other.jobseeker) && date.equals(other.date);

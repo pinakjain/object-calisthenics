@@ -57,9 +57,7 @@ public class Jobseeker
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
+    if (!(obj instanceof Jobseeker))
       return false;
     Jobseeker other = (Jobseeker) obj;
     return id.equals(other.id);

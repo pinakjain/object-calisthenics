@@ -2,6 +2,8 @@ package main.jobseeker;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import main.jobApplication.JobApplication;
+
 public class JobseekerId
 {
   private int                  id;
@@ -23,9 +25,7 @@ public class JobseekerId
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
+    if (!(obj instanceof JobseekerId))
       return false;
     JobseekerId other = (JobseekerId) obj;
     return id == other.id;

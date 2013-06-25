@@ -1,5 +1,7 @@
 package main.jobs;
 
+import main.jobApplication.JobApplication;
+
 public class JReqJob implements Job
 {
 
@@ -35,9 +37,7 @@ public class JReqJob implements Job
   {
     if (this == obj)
       return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
+    if (!(obj instanceof JReqJob))
       return false;
     JReqJob other = (JReqJob) obj;
     return id.equals(other.id);
