@@ -28,8 +28,10 @@ public class TestRecruiterJobApplications
   private JobApplicationManager jobApplicationManager;
   private ResumeRepository      resumeRepository;
   private RecruiterJob          recruiterJob;
-  private JobApplication        application;
-  private Jobseeker             jobseeker;
+  private JobApplication        application1;
+  private JobApplication        application2;
+  private Jobseeker             jobseeker1;
+  private Jobseeker             jobseeker2;
   private JobApplicationFactory factory;
 
   @Before
@@ -53,53 +55,52 @@ public class TestRecruiterJobApplications
   @Test
   public void jobseekersWhoHaveAppliedToRecruiterJob()
   {
-    Jobseekers jobseekers = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
-    for (Jobseeker applicant : jobseekers)
-    {
-      assertTrue(application.wasSubmittedBy(applicant));
-    }
+    jobApplications.add(application2);
+    Jobseekers applicants = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
+    Jobseekers jobseekers = new Jobseekers();
+    jobseekers.add(jobseeker1);
+    jobseekers.add(jobseeker2);
+    assertEquals(2, applicants.size());
+    assertTrue(applicants.contains(jobseeker1));
+    assertTrue(applicants.contains(jobseeker2));
+    assertTrue(applicants.equals(jobseekers));
   }
 
   @Test
   public void jobseekersWhoHaveAppliedOnAGivenDate()
   {
     Date date = DateUtils.createDate();
-    Jobseekers jobseekers = recruiter.applicantsByDate(date, jobApplicationManager);
-    for (Jobseeker applicant : jobseekers)
-    {
-      assertTrue(application.wasSubmittedBy(applicant));
-      assertTrue(application.wasAppliedOn(date));
-      // TODO implement for a different date
-      // assertFalse(application.isAppliedOn(date));
-    }
+    Jobseekers applicants = recruiter.applicantsByDate(date, jobApplicationManager);
+    assertEquals(1, applicants.size());
+    assertTrue(applicants.contains(jobseeker1));
   }
 
   @Test
   public void jobseekersWhoHaveAppliedForARecruiterJobOnAGivenDate()
   {
-    Jobseekers jobseekers = recruiter.applicantsByJobAndByDate(recruiterJob,
+    Jobseekers applicants = recruiter.applicantsByJobAndByDate(recruiterJob,
                                                                DateUtils.createDate(),
                                                                jobApplicationManager);
-    for (Jobseeker applicant : jobseekers)
-    {
-      assertTrue(application.wasSubmittedBy(applicant));
-    }
+    assertEquals(1, applicants.size());
+    assertTrue(applicants.contains(jobseeker1));
   }
 
   private void setUpJobApplications()
   {
     jobApplications = new JobApplications();
-    jobApplications.add(application);
+    jobApplications.add(application1);
   }
 
   private void setUpJobApplication()
   {
-    application = factory.createApplication(jobseeker, recruiterJob);
+    application1 = factory.createApplication(jobseeker1, recruiterJob);
+    application2 = factory.createApplication(jobseeker2, recruiterJob);
   }
 
   private void setUpJobseeker()
   {
-    jobseeker = new Jobseeker("Tom");
+    jobseeker1 = new Jobseeker("Tom");
+    jobseeker2 = new Jobseeker("Joe");
   }
 
   private void setUpRecruiter()
@@ -110,8 +111,9 @@ public class TestRecruiterJobApplications
   private void setUpResumeRepo()
   {
     resumeRepository = new ResumeRepository();
-    resumeRepository.add(jobseeker, new Resume("Resume"));
-  }
+    resumeRepository.add(jobseeker1, new Resume("Resume"));
+    resumeRepository.add(jobseeker2, new Resume("Resume"));
+}
 
   private void setUpJobApplicationManager()
   {
