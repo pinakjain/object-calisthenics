@@ -55,7 +55,6 @@ public class TestJobseekerSavedJobs
   {
     RecruiterJob job1 = saveATSJob();
     RecruiterJob job2 = saveJReqJob();
-    jobseeker.viewSavedJobs(savedJobsManager).display();
     assertTrue(savedJobs.containsJobSavedByJobseeker(jobseeker, job1));
     assertTrue(savedJobs.containsJobSavedByJobseeker(jobseeker, job2));
   }

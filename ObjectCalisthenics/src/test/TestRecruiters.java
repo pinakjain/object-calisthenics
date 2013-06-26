@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+import main.display.ConsoleDisplayer;
+import main.display.Displayer;
 import main.recruiter.Recruiter;
 import main.recruiter.Recruiters;
 
@@ -12,6 +14,7 @@ public class TestRecruiters
 {
 
   private Recruiters recruiters;
+  private Displayer displayer;
 
   @Test
   public void testEmptyRecruiters()
@@ -37,11 +40,22 @@ public class TestRecruiters
   {
     Recruiter recruiter1 = recruiters.add(setUpRecruiter());
     Recruiter recruiter2 = recruiters.add(setUpRecruiter());
-    recruiters.display();
     assertFalse(recruiter1.equals(recruiter2));
     assertTrue(recruiters.contains(recruiter1));
     assertTrue(recruiters.contains(recruiter2));
-
+  }
+  
+  @Test
+  public void displayRecruiters()
+  {
+    Recruiter recruiter1 = setUpRecruiter();
+    Recruiter recruiter2 = setUpRecruiter();
+    recruiters.add(recruiter1);
+    recruiters.add(recruiter2);
+    StringBuffer sb  =  new StringBuffer();
+    sb.append(recruiter1);
+    sb.append(recruiter2);
+    assertEquals(sb.toString(), recruiters.display(displayer).toString());
   }
 
   private static Recruiter setUpRecruiter()
@@ -53,6 +67,7 @@ public class TestRecruiters
   public void setUpRecruiters()
   {
     recruiters = new Recruiters();
+    displayer = new ConsoleDisplayer();
   }
 
 }

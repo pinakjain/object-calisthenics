@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+import main.display.ConsoleDisplayer;
+import main.display.Displayer;
 import main.jobs.ATSJob;
 import main.jobs.JReqJob;
 import main.jobs.Jobs;
@@ -16,12 +18,14 @@ public class TestJobs
 
   private Jobs      jobs;
   private Recruiter recruiter;
+  private Displayer displayer;
 
   @Before
   public void setUp()
   {
     setUpJobs();
     setUpRecruiter();
+    setUpDisplayer();
   }
 
   @Test
@@ -40,7 +44,6 @@ public class TestJobs
   public void addATSJob()
   {
     RecruiterJob job = jobs.add(setUpATSRecruiterJob());
-    jobs.display();
     assertTrue(jobs.contains(job));
   }
 
@@ -48,7 +51,6 @@ public class TestJobs
   public void addJreqJob()
   {
     RecruiterJob job = jobs.add(setUpJReqRecruiterJob());
-    jobs.display();
     assertTrue(jobs.contains(job));
   }
 
@@ -57,7 +59,6 @@ public class TestJobs
   {
     RecruiterJob job1 = jobs.add(setUpJReqRecruiterJob());
     RecruiterJob job2 = jobs.add(setUpATSRecruiterJob());
-    jobs.display();
     assertFalse(job1.equals(job2));
     assertTrue(jobs.contains(job1));
     assertTrue(jobs.contains(job2));
@@ -68,12 +69,24 @@ public class TestJobs
   {
     RecruiterJob job1 = jobs.add(setUpATSRecruiterJob());
     RecruiterJob job2 = jobs.add(setUpATSRecruiterJob());
-    jobs.display();
     assertFalse(job1.equals(job2));
     assertTrue(jobs.contains(job1));
     assertTrue(jobs.contains(job2));
   }
 
+  @Test
+  public void displayJobs() 
+  {
+    RecruiterJob job1 = setUpJReqRecruiterJob();
+    RecruiterJob job2 = setUpATSRecruiterJob();
+    jobs.add(job1);
+    jobs.add(job2);
+    StringBuffer sb = new StringBuffer();
+    sb.append(job1);
+    sb.append(job2);
+    assertEquals(sb.toString(), jobs.display(displayer).toString());
+  }
+  
   private RecruiterJob setUpATSRecruiterJob()
   {
     return new RecruiterJob(recruiter, setUpATSJob());
@@ -102,6 +115,11 @@ public class TestJobs
   private static JReqJob setUpJReqJob()
   {
     return new JReqJob("Software");
+  }
+  
+  private void setUpDisplayer()
+  {
+    displayer = new ConsoleDisplayer();
   }
 
 }

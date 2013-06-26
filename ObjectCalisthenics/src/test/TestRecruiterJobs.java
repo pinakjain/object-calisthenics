@@ -37,7 +37,6 @@ public class TestRecruiterJobs
   public void testPostingATSJob()
   {
     RecruiterJob job = postATSJob();
-    jobs.display();
     assertTrue(jobs.contains(job));
   }
 
@@ -45,7 +44,6 @@ public class TestRecruiterJobs
   public void testPostingJreqJob()
   {
     RecruiterJob job = postJreqJob();
-    jobs.display();
     assertTrue(jobs.contains(job));
   }
 
@@ -58,7 +56,6 @@ public class TestRecruiterJobs
     assertEquals(2, recruiterJobs.size());
     assertTrue(jobs.contains(job1));
     assertTrue(jobs.contains(job2));
-    jobs.display();
   }
 
   private void setUpJobsManager()

@@ -54,7 +54,6 @@ public class TestRecruiterJobApplications
   public void jobseekersWhoHaveAppliedToRecruiterJob()
   {
     Jobseekers jobseekers = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
-    jobseekers.display();
     for (Jobseeker applicant : jobseekers)
     {
       assertTrue(application.wasSubmittedBy(applicant));
@@ -66,7 +65,6 @@ public class TestRecruiterJobApplications
   {
     Date date = DateUtils.createDate();
     Jobseekers jobseekers = recruiter.applicantsByDate(date, jobApplicationManager);
-    jobseekers.display();
     for (Jobseeker applicant : jobseekers)
     {
       assertTrue(application.wasSubmittedBy(applicant));
@@ -82,7 +80,6 @@ public class TestRecruiterJobApplications
     Jobseekers jobseekers = recruiter.applicantsByJobAndByDate(recruiterJob,
                                                                DateUtils.createDate(),
                                                                jobApplicationManager);
-    jobseekers.display();
     for (Jobseeker applicant : jobseekers)
     {
       assertTrue(application.wasSubmittedBy(applicant));
