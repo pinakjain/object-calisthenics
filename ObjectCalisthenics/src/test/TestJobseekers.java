@@ -70,6 +70,32 @@ public class TestJobseekers
     sb.append(jobseeker2);
     assertEquals(sb.toString(), jobseekers.display(displayer).toString());
   }
+  
+  @Test
+  public void testEquals() 
+  {
+    Jobseeker jobseeker1 = setUpJobseeker();
+    Jobseeker jobseeker2 = setUpJobseeker();
+    jobseekers.add(jobseeker1);
+    jobseekers.add(jobseeker2);
+    Jobseekers jobseekersCopy = new Jobseekers();
+    jobseekersCopy.add(jobseeker1);
+    jobseekersCopy.add(jobseeker2);
+    assertTrue(jobseekers.equals(jobseekersCopy));
+  }
+  
+  @Test
+  public void testNotEquals() 
+  {
+    Jobseeker jobseeker1 = setUpJobseeker();
+    Jobseeker jobseeker2 = setUpJobseeker();
+    jobseekers.add(jobseeker1);
+    jobseekers.add(jobseeker2);
+    Jobseekers jobseekersCopy = new Jobseekers();
+    jobseekersCopy.add(jobseeker1);
+    assertFalse(jobseekers.equals(jobseekersCopy));
+  }
+  
 
   private void setUpJobseekers()
   {
