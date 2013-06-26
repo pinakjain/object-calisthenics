@@ -50,6 +50,15 @@ public class Jobseekers implements Iterable<Jobseeker>
   {
     return jobseekers.contains(jobseeker);
   }
+  
+  public boolean containsAll(Jobseekers seekrs)
+  {
+    for(Jobseeker jobseeker : seekrs){
+      if(! jobseekers.contains(jobseeker))
+        return false;
+    }
+    return true;
+  }
 
   @Override
   public Iterator<Jobseeker> iterator()
@@ -57,5 +66,28 @@ public class Jobseekers implements Iterable<Jobseeker>
     Iterator<Jobseeker> iter = jobseekers.iterator();
     return iter;
   }
+  
+  
+  @Override
+  public int hashCode()
+  {
+    int hashcode = 0;
+    for(Jobseeker jobseeker : jobseekers){
+      hashcode += jobseeker.hashCode();
+    }
+    return hashcode;
+  }
 
+  @Override
+  public boolean equals(Object obj)
+  {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Jobseekers))
+      return false;
+    Jobseekers other = (Jobseekers) obj;
+    if(this.size() != other.size())
+      return false;
+    return this.containsAll(other);
+  }
 }
