@@ -18,7 +18,8 @@ public class JobApplication
 
   JobApplication(Jobseeker jobseeker,
                  RecruiterJob job,
-                 Resume resume)
+                 Resume resume,
+                 Date date)
   {
     if (jobseeker == null)
       throw new IllegalArgumentException("Jobseeker cannot be null");
@@ -29,7 +30,7 @@ public class JobApplication
     this.jobseeker = jobseeker;
     this.job = job;
     this.resume = resume;
-    this.date = DateUtils.createDate();
+    this.date = date;
   }
 
   public boolean wasSubmittedBy(Jobseeker seeker)
