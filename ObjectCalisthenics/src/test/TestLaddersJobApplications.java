@@ -11,6 +11,7 @@ import main.jobseeker.Jobseeker;
 import main.recruiter.Recruiter;
 import main.resume.Resume;
 import main.resume.ResumeRepository;
+import main.utils.DateUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class TestLaddersJobApplications
 
   private void setUpFactory()
   {
-    factory = new JobApplicationFactory(resumeRepository);
+    factory = new JobApplicationFactory(resumeRepository, DateUtils.createDate());
   }
 
   @Test
@@ -82,7 +83,7 @@ public class TestLaddersJobApplications
 
   private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository));
+    jobApplicationManager = new JobApplicationManager(jobApplications, factory);
   }
 
   private void setUpATSJob()

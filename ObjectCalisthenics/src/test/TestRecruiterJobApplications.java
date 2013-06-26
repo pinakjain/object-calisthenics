@@ -49,7 +49,7 @@ public class TestRecruiterJobApplications
 
   private void setUpFactory()
   {
-    factory = new JobApplicationFactory(resumeRepository);
+    factory = new JobApplicationFactory(resumeRepository, DateUtils.createDate());
   }
 
   @Test
@@ -117,7 +117,7 @@ public class TestRecruiterJobApplications
 
   private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository));
+    jobApplicationManager = new JobApplicationManager(jobApplications, factory);
   }
 
   private void setUpATSJob()

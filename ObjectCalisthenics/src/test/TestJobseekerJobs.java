@@ -13,6 +13,7 @@ import main.recruiter.Recruiter;
 import main.jobs.RecruiterJob;
 import main.resume.Resume;
 import main.resume.ResumeRepository;
+import main.utils.DateUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -86,7 +87,7 @@ public class TestJobseekerJobs
 
   private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository));
+    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository, DateUtils.createDate()));
   }
 
   private void setUpJobseeker()
