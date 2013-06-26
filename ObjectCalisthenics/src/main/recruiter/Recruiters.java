@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import main.display.Displayer;
+
 public class Recruiters implements Iterable<Recruiter>
 {
 
@@ -22,12 +24,15 @@ public class Recruiters implements Iterable<Recruiter>
     return recruiter;
   }
 
-  public void display()
+  public StringBuffer display(Displayer displayer)
   {
+    StringBuffer sb = new StringBuffer();
     for (Recruiter recruiter : recruiters)
     {
-      recruiter.display();
+      displayer.display(recruiter.toString());
+      sb.append(recruiter.toString());
     }
+    return sb;
   }
 
   public int size()
