@@ -26,7 +26,7 @@ public class JobApplicationFactory
   public JobApplication createApplication(Jobseeker jobseeker,
                                           RecruiterJob job) throws IllegalArgumentException
   {
-    if (job.requiresResume())
+    if (job.isJReqJob())
     {
       return applicationUsingResume(jobseeker, job);
     }
