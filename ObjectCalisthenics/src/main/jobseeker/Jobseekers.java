@@ -86,8 +86,8 @@ public class Jobseekers implements Iterable<Jobseeker>
     if (!(obj instanceof Jobseekers))
       return false;
     Jobseekers other = (Jobseekers) obj;
-    if(this.size() != other.size())
+    if(size() != other.size())
       return false;
-    return this.containsAll(other);
+    return containsAll(other);
   }
 }
