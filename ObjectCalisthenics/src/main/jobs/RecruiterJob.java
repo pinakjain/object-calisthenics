@@ -29,9 +29,14 @@ public class RecruiterJob
     job.display();
   }
 
-  public boolean requiresResume()
+  public boolean isATSJob()
   {
-    return job.requiresResume();
+    return job instanceof ATSJob;
+  }
+  
+  public boolean isJReqJob()
+  {
+    return job instanceof JReqJob;
   }
 
   @Override
