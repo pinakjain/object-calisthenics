@@ -58,7 +58,7 @@ public class TestJobseekerJobs
     assertTrue(jobApplications.contains(application));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void applyJreqJobWithoutUsingResume()
   {
     RecruiterJob recruiterJob = new RecruiterJob(recruiter, new JReqJob("Software"));
@@ -87,7 +87,7 @@ public class TestJobseekerJobs
 
   private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository, DateUtils.createDate()));
+    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository, DateUtils.currentDate()));
   }
 
   private void setUpJobseeker()
