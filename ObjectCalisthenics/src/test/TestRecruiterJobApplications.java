@@ -33,6 +33,7 @@ public class TestRecruiterJobApplications
   private Jobseeker             jobseeker1;
   private Jobseeker             jobseeker2;
   private JobApplicationFactory factory;
+  private JobApplicationFactory factoryWithYesterdayDate;
 
   @Before
   public void setUp()
@@ -42,6 +43,7 @@ public class TestRecruiterJobApplications
     setUpResumeRepo();
     setUpATSJob();
     setUpFactory();
+    setUpFactoryWithYesterdayDate();
     setUpJobApplication();
     setUpJobApplications();
     setUpJobApplicationManager();
@@ -49,40 +51,55 @@ public class TestRecruiterJobApplications
 
   private void setUpFactory()
   {
-    factory = new JobApplicationFactory(resumeRepository, DateUtils.createDate());
+    factory = new JobApplicationFactory(resumeRepository, DateUtils.currentDate());
+  }
+  
+  private void setUpFactoryWithYesterdayDate()
+  {
+    factoryWithYesterdayDate = new JobApplicationFactory(resumeRepository, DateUtils.yesterdayDate());
   }
 
   @Test
   public void jobseekersWhoHaveAppliedToRecruiterJob()
   {
     jobApplications.add(application2);
-    Jobseekers applicants = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
+    Jobseekers applicants = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);  
     Jobseekers jobseekers = new Jobseekers();
     jobseekers.add(jobseeker1);
     jobseekers.add(jobseeker2);
-    assertEquals(2, applicants.size());
-    assertTrue(applicants.contains(jobseeker1));
-    assertTrue(applicants.contains(jobseeker2));
-    assertTrue(applicants.equals(jobseekers));
+    assertEquals(jobseekers, applicants);
   }
 
   @Test
-  public void jobseekersWhoHaveAppliedOnAGivenDate()
+  public void jobseekersWhoHaveAppliedOnAToday()
   {
-    Date date = DateUtils.createDate();
-    Jobseekers applicants = recruiter.applicantsByDate(date, jobApplicationManager);
+    Date yesterday = DateUtils.yesterdayDate();
+    Jobseekers applicants = recruiter.applicantsByDate(DateUtils.currentDate(), jobApplicationManager);
     assertEquals(1, applicants.size());
     assertTrue(applicants.contains(jobseeker1));
+    assertFalse(application1.wasAppliedOn(yesterday));
+  }
+  
+  @Test
+  public void jobseekersWhoHaveAppliedOnAGivenDate()
+  {
+    Date yesterday = DateUtils.yesterdayDate();
+    jobApplications.add(application2);
+    Jobseekers applicants = recruiter.applicantsByDate(yesterday, jobApplicationManager);
+    assertEquals(1, applicants.size());
+    assertTrue(applicants.contains(jobseeker2));
+    assertFalse(application2.wasAppliedOn(DateUtils.currentDate()));
   }
 
   @Test
   public void jobseekersWhoHaveAppliedForARecruiterJobOnAGivenDate()
   {
     Jobseekers applicants = recruiter.applicantsByJobAndByDate(recruiterJob,
-                                                               DateUtils.createDate(),
+                                                               DateUtils.currentDate(),
                                                                jobApplicationManager);
-    assertEquals(1, applicants.size());
-    assertTrue(applicants.contains(jobseeker1));
+    Jobseekers jobseekers = new Jobseekers();
+    jobseekers.add(jobseeker1);
+    assertEquals(jobseekers, applicants);
   }
 
   private void setUpJobApplications()
@@ -94,7 +111,7 @@ public class TestRecruiterJobApplications
   private void setUpJobApplication()
   {
     application1 = factory.createApplication(jobseeker1, recruiterJob);
-    application2 = factory.createApplication(jobseeker2, recruiterJob);
+    application2 = factoryWithYesterdayDate.createApplication(jobseeker2, recruiterJob);
   }
 
   private void setUpJobseeker()

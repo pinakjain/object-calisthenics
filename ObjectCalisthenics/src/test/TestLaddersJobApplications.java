@@ -41,7 +41,7 @@ public class TestLaddersJobApplications
 
   private void setUpFactory()
   {
-    factory = new JobApplicationFactory(resumeRepository, DateUtils.createDate());
+    factory = new JobApplicationFactory(resumeRepository, DateUtils.currentDate());
   }
 
   @Test
@@ -61,6 +61,7 @@ public class TestLaddersJobApplications
     jobApplications = new JobApplications();
     jobApplications.add(factory.createApplication(jobseeker1, recruiterJob));
     jobApplications.add(factory.createApplication(jobseeker2, recruiterJob));
+    jobApplications.add(factory.createApplication(jobseeker1, new RecruiterJob(new Recruiter("Dummy"), new ATSJob("Dummy"))));
   }
 
   private void setUpJobseeker()

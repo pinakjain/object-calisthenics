@@ -20,12 +20,12 @@ import org.junit.Test;
 public class TestJobApplications
 {
 
-  private JobApplications  jobApplications;
-  private Jobseeker        jobseeker;
-  private Recruiter        recruiter;
-  private Resume           resume;
-  private JobApplicationFactory          factory;
-  private ResumeRepository resumeRepository;
+  private JobApplications       jobApplications;
+  private Jobseeker             jobseeker;
+  private Recruiter             recruiter;
+  private Resume                resume;
+  private JobApplicationFactory factory;
+  private ResumeRepository      resumeRepository;
 
   @Before
   public void setUp()
@@ -94,7 +94,7 @@ public class TestJobApplications
 
   private void setUpFactory()
   {
-    factory = new JobApplicationFactory(resumeRepository, DateUtils.createDate());
+    factory = new JobApplicationFactory(resumeRepository, DateUtils.currentDate());
   }
 
   private void setUpResumeRepo()
