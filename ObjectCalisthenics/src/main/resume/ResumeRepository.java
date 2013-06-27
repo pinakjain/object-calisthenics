@@ -27,6 +27,9 @@ public class ResumeRepository
 
   public Resume getResume(Jobseeker jobseeker)
   {
+    if (resumeRepo.get(jobseeker) == null)
+      //TODO Replace the null pointer exception with a Resume Not Found Exception
+      throw new NullPointerException("No resume for this jobseeker");
     return resumeRepo.get(jobseeker);
   }
 
