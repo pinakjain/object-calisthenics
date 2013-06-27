@@ -81,7 +81,7 @@ public class TestJobseekers
     Jobseekers jobseekersCopy = new Jobseekers();
     jobseekersCopy.add(jobseeker1);
     jobseekersCopy.add(jobseeker2);
-    assertTrue(jobseekers.equals(jobseekersCopy));
+    assertEquals(jobseekers, jobseekersCopy);
   }
   
   @Test
@@ -93,7 +93,7 @@ public class TestJobseekers
     jobseekers.add(jobseeker2);
     Jobseekers jobseekersCopy = new Jobseekers();
     jobseekersCopy.add(jobseeker1);
-    assertFalse(jobseekers.equals(jobseekersCopy));
+    assertNotSame(jobseekers, jobseekersCopy);
   }
   
 
