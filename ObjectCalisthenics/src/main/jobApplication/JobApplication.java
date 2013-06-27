@@ -25,8 +25,6 @@ public class JobApplication
       throw new IllegalArgumentException("Jobseeker cannot be null");
     if (job == null)
       throw new IllegalArgumentException("Job cannot be null");
-    if (job.requiresResume() && resume == null)
-      throw new IllegalArgumentException("Resume required for this job");
     this.jobseeker = jobseeker;
     this.job = job;
     this.resume = resume;
