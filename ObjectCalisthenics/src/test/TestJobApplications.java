@@ -1,9 +1,9 @@
 package test;
 
-import static org.junit.Assert.*;
-
-import main.jobApplication.JobApplicationFactory;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import main.jobApplication.JobApplication;
+import main.jobApplication.JobApplicationFactory;
 import main.jobApplication.JobApplications;
 import main.jobs.ATSJob;
 import main.jobs.JReqJob;
@@ -13,6 +13,7 @@ import main.recruiter.Recruiter;
 import main.resume.Resume;
 import main.resume.ResumeRepository;
 import main.utils.DateUtils;
+import main.utils.TestApplicationDateGenerator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -94,7 +95,7 @@ public class TestJobApplications
 
   private void setUpFactory()
   {
-    factory = new JobApplicationFactory(resumeRepository, DateUtils.currentDate());
+    factory = new JobApplicationFactory(resumeRepository, new TestApplicationDateGenerator(DateUtils.currentDate()));
   }
 
   private void setUpResumeRepo()

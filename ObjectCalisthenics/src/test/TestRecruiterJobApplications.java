@@ -1,21 +1,24 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import main.jobs.ATSJob;
-import main.jobApplication.JobApplicationFactory;
 import main.jobApplication.JobApplication;
+import main.jobApplication.JobApplicationFactory;
 import main.jobApplication.JobApplicationManager;
 import main.jobApplication.JobApplications;
+import main.jobs.ATSJob;
+import main.jobs.RecruiterJob;
 import main.jobseeker.Jobseeker;
 import main.jobseeker.Jobseekers;
 import main.recruiter.Recruiter;
-import main.jobs.RecruiterJob;
 import main.resume.Resume;
 import main.resume.ResumeRepository;
 import main.utils.DateUtils;
+import main.utils.TestApplicationDateGenerator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,19 +54,19 @@ public class TestRecruiterJobApplications
 
   private void setUpFactory()
   {
-    factory = new JobApplicationFactory(resumeRepository, DateUtils.currentDate());
+    factory = new JobApplicationFactory(resumeRepository, new TestApplicationDateGenerator(DateUtils.currentDate()));
   }
-  
+
   private void setUpFactoryWithYesterdayDate()
   {
-    factoryWithYesterdayDate = new JobApplicationFactory(resumeRepository, DateUtils.yesterdayDate());
+    factoryWithYesterdayDate = new JobApplicationFactory(resumeRepository, new TestApplicationDateGenerator(DateUtils.yesterdayDate()));
   }
 
   @Test
   public void jobseekersWhoHaveAppliedToRecruiterJob()
   {
     jobApplications.add(application2);
-    Jobseekers applicants = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);  
+    Jobseekers applicants = recruiter.applicantsByJob(recruiterJob, jobApplicationManager);
     Jobseekers jobseekers = new Jobseekers();
     jobseekers.add(jobseeker1);
     jobseekers.add(jobseeker2);
@@ -79,7 +82,7 @@ public class TestRecruiterJobApplications
     assertTrue(applicants.contains(jobseeker1));
     assertFalse(application1.wasAppliedOn(yesterday));
   }
-  
+
   @Test
   public void jobseekersWhoHaveAppliedOnAGivenDate()
   {
@@ -130,7 +133,7 @@ public class TestRecruiterJobApplications
     resumeRepository = new ResumeRepository();
     resumeRepository.add(jobseeker1, new Resume("Resume"));
     resumeRepository.add(jobseeker2, new Resume("Resume"));
-}
+  }
 
   private void setUpJobApplicationManager()
   {

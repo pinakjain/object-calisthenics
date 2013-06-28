@@ -14,6 +14,7 @@ import main.jobs.RecruiterJob;
 import main.resume.Resume;
 import main.resume.ResumeRepository;
 import main.utils.DateUtils;
+import main.utils.TestApplicationDateGenerator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +36,6 @@ public class TestJobseekerJobs
     setUpJobApplications();
     setUpJobApplicationManager();
     setUpRecruiter();
-
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -87,7 +87,7 @@ public class TestJobseekerJobs
 
   private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository, DateUtils.currentDate()));
+    jobApplicationManager = new JobApplicationManager(jobApplications, new JobApplicationFactory(resumeRepository, new TestApplicationDateGenerator(DateUtils.currentDate())));
   }
 
   private void setUpJobseeker()
