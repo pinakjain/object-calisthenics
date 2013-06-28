@@ -7,9 +7,16 @@ import java.util.GregorianCalendar;
 public class DateUtils
 {
 
-  public static Date createDate()
+  public static Date currentDate()
   {
     Calendar calendar = createCalendarInstance();
+    return calendar.getTime();
+  }
+  
+  public static Date yesterdayDate()
+  {
+    Calendar calendar = createCalendarInstance();
+    calendar.add(Calendar.DATE, -1);
     return calendar.getTime();
   }
 
