@@ -2,8 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.display.ConsoleDisplayer;
-import main.display.Displayer;
+import main.display.TestDisplayer;
 import main.jobs.ATSJob;
 import main.jobs.JReqJob;
 import main.jobs.Jobs;
@@ -18,7 +17,7 @@ public class TestJobs
 
   private Jobs      jobs;
   private Recruiter recruiter;
-  private Displayer displayer;
+  private TestDisplayer displayer;
 
   @Before
   public void setUp()
@@ -84,7 +83,8 @@ public class TestJobs
     StringBuffer sb = new StringBuffer();
     sb.append(job1);
     sb.append(job2);
-    assertEquals(sb.toString(), jobs.display(displayer).toString());
+    jobs.display(displayer);
+    assertEquals(sb.toString(), displayer.displayedText().toString());
   }
   
   private RecruiterJob setUpATSRecruiterJob()
@@ -119,7 +119,7 @@ public class TestJobs
   
   private void setUpDisplayer()
   {
-    displayer = new ConsoleDisplayer();
+    displayer = new TestDisplayer();
   }
 
 }

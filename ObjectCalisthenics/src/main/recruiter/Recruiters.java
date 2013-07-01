@@ -24,15 +24,12 @@ public class Recruiters implements Iterable<Recruiter>
     return recruiter;
   }
 
-  public StringBuffer display(Displayer displayer)
+  public void display(Displayer displayer)
   {
-    StringBuffer sb = new StringBuffer();
     for (Recruiter recruiter : recruiters)
     {
       displayer.display(recruiter.toString());
-      sb.append(recruiter.toString());
     }
-    return sb;
   }
 
   public int size()

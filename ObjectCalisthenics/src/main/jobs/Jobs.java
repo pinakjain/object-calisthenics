@@ -30,15 +30,12 @@ public class Jobs implements Iterable<RecruiterJob>
     return job;
   }
 
-  public StringBuffer display(Displayer displayer)
+  public void display(Displayer displayer)
   {
-    StringBuffer sb = new StringBuffer();
     for (RecruiterJob job : jobs)
     {
       displayer.display(job.toString());
-      sb.append(job.toString());
     }
-    return sb;
   }
 
   public Jobs jobPostingsBy(Recruiter recruiter)

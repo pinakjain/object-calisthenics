@@ -30,15 +30,12 @@ public class Jobseekers implements Iterable<Jobseeker>
     return jobseeker;
   }
 
-  public StringBuffer display(Displayer displayer)
+  public void display(Displayer displayer)
   {
-    StringBuffer sb = new StringBuffer();
     for (Jobseeker jobseeker : jobseekers)
     {
       displayer.display(jobseeker.toString());
-      sb.append(jobseeker.toString());
     }
-    return sb;
   }
 
   public int size()
