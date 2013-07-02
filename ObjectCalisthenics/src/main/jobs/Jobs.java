@@ -49,8 +49,8 @@ public class Jobs implements Iterable<RecruiterJob>
   }
 
   private static void addJobIfPostedBy(Recruiter recruiter,
-                                List<RecruiterJob> jobPostings,
-                                RecruiterJob job)
+                                       List<RecruiterJob> jobPostings,
+                                       RecruiterJob job)
   {
     if (job.isPostedBy(recruiter))
     {

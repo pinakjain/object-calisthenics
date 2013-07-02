@@ -18,7 +18,8 @@ public class Jobseekers implements Iterable<Jobseeker>
 
   public Jobseekers(List<Jobseeker> jobseekers)
   {
-    if(jobseekers == null) throw new IllegalArgumentException("Jobseekers cannot be null");
+    if (jobseekers == null)
+      throw new IllegalArgumentException("Jobseekers cannot be null");
     this.jobseekers = jobseekers;
   }
 
@@ -47,11 +48,12 @@ public class Jobseekers implements Iterable<Jobseeker>
   {
     return jobseekers.contains(jobseeker);
   }
-  
+
   public boolean containsAll(Jobseekers seekrs)
   {
-    for(Jobseeker jobseeker : seekrs){
-      if(! jobseekers.contains(jobseeker))
+    for (Jobseeker jobseeker : seekrs)
+    {
+      if (!jobseekers.contains(jobseeker))
         return false;
     }
     return true;
@@ -63,13 +65,13 @@ public class Jobseekers implements Iterable<Jobseeker>
     Iterator<Jobseeker> iter = jobseekers.iterator();
     return iter;
   }
-  
-  
+
   @Override
   public int hashCode()
   {
     int hashcode = 0;
-    for(Jobseeker jobseeker : jobseekers){
+    for (Jobseeker jobseeker : jobseekers)
+    {
       hashcode += jobseeker.hashCode();
     }
     return hashcode;
@@ -83,7 +85,7 @@ public class Jobseekers implements Iterable<Jobseeker>
     if (!(obj instanceof Jobseekers))
       return false;
     Jobseekers other = (Jobseekers) obj;
-    if(size() != other.size())
+    if (size() != other.size())
       return false;
     return containsAll(other);
   }

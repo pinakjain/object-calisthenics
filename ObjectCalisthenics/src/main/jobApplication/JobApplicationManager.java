@@ -57,8 +57,8 @@ public class JobApplicationManager
   }
 
   private static void addJobseekerIfAppliedFor(RecruiterJob recruiterJob,
-                                        List<Jobseeker> jobseekers,
-                                        JobApplication application)
+                                               List<Jobseeker> jobseekers,
+                                               JobApplication application)
   {
     if (application.wasAppliedFor(recruiterJob))
     {
@@ -77,8 +77,8 @@ public class JobApplicationManager
   }
 
   private static void addJobseekerIfAppliedOn(Date date,
-                                       List<Jobseeker> jobseekers,
-                                       JobApplication application)
+                                              List<Jobseeker> jobseekers,
+                                              JobApplication application)
   {
     if (application.wasAppliedOn(date))
     {
@@ -87,7 +87,7 @@ public class JobApplicationManager
   }
 
   public Jobseekers applicationsFor(RecruiterJob recruiterJob,
-                                 Date date)
+                                    Date date)
   {
     List<Jobseeker> jobseekers = new ArrayList<>();
     for (JobApplication application : jobApplications)
@@ -98,9 +98,9 @@ public class JobApplicationManager
   }
 
   private static void addJobseekerIfAppliedForAJobOnAGivenDate(RecruiterJob recruiterJob,
-                                                        Date date,
-                                                        List<Jobseeker> jobseekers,
-                                                        JobApplication application)
+                                                               Date date,
+                                                               List<Jobseeker> jobseekers,
+                                                               JobApplication application)
   {
     if (application.wasAppliedFor(recruiterJob) && application.wasAppliedOn(date))
     {
@@ -119,8 +119,8 @@ public class JobApplicationManager
   }
 
   private static void addApplicationIfPostedBy(Recruiter recruiter,
-                                        List<JobApplication> applications,
-                                        JobApplication application)
+                                               List<JobApplication> applications,
+                                               JobApplication application)
   {
     if (application.forJobPostedBy(recruiter))
     {
@@ -139,8 +139,8 @@ public class JobApplicationManager
   }
 
   private static void addApplicationIfAppliedFor(RecruiterJob recruiterJob,
-                                          List<JobApplication> applications,
-                                          JobApplication application)
+                                                 List<JobApplication> applications,
+                                                 JobApplication application)
   {
     if (application.wasAppliedFor(recruiterJob))
     {

@@ -42,8 +42,8 @@ public class JobApplications implements Iterable<JobApplication>
   }
 
   private static void addApplicationIfAppliedBy(Jobseeker jobseeker,
-                                         List<JobApplication> applicationsByJobseeker,
-                                         JobApplication application)
+                                                List<JobApplication> applicationsByJobseeker,
+                                                JobApplication application)
   {
     if (application.wasSubmittedBy(jobseeker))
     {

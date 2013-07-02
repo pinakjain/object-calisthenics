@@ -8,7 +8,8 @@ public class TestApplicationDateGenerator implements DateGenerator
 
   public TestApplicationDateGenerator(Date date)
   {
-    if(date == null) throw new IllegalArgumentException("Date cannot be null");
+    if (date == null)
+      throw new IllegalArgumentException("Date cannot be null");
     this.date = date;
   }
 
@@ -18,5 +19,4 @@ public class TestApplicationDateGenerator implements DateGenerator
     return date;
   }
 
- 
 }

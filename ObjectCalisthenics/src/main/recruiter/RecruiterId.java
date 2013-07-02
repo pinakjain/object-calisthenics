@@ -33,10 +33,11 @@ public class RecruiterId
   {
     return counter.getAndIncrement();
   }
-  
-  public static RecruiterId createRecruiterId(){
+
+  public static RecruiterId createRecruiterId()
+  {
     return new RecruiterId();
- }
+  }
 
   @Override
   public String toString()

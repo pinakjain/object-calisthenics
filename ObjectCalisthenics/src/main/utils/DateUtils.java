@@ -12,7 +12,7 @@ public class DateUtils
     Calendar calendar = createCalendarInstance();
     return calendar.getTime();
   }
-  
+
   public static Date yesterdayDate()
   {
     Calendar calendar = createCalendarInstance();

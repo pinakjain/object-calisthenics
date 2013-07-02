@@ -12,7 +12,7 @@ public class JobApplicationFactory
   private final DateGenerator    dateGenerator;
 
   public JobApplicationFactory(ResumeRepository resumeRepository,
-                               DateGenerator    dateGenerator)
+                               DateGenerator dateGenerator)
   {
     if (resumeRepository == null)
       throw new IllegalArgumentException("Resume repository cannot be null");
