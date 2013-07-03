@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.display.TestDisplayer;
+import main.display.JobseekerDisplayer;
 import main.jobseeker.Jobseeker;
 import main.jobseeker.Jobseekers;
 
@@ -13,7 +13,7 @@ public class TestJobseekers
 {
 
   private Jobseekers jobseekers;
-  private TestDisplayer displayer;
+  private JobseekerDisplayer displayer;
 
   @Before
   public void setUp() 
@@ -25,7 +25,7 @@ public class TestJobseekers
 
   private void setUpDisplayer()
   {
-    displayer = new TestDisplayer();
+    displayer = new JobseekerDisplayer();
   }
 
   @Test
@@ -64,11 +64,7 @@ public class TestJobseekers
     Jobseeker jobseeker2 = setUpJobseeker();
     jobseekers.add(jobseeker1);
     jobseekers.add(jobseeker2);
-    StringBuffer sb = new StringBuffer();
-    sb.append(jobseeker1);
-    sb.append(jobseeker2);
     jobseekers.display(displayer);
-    assertEquals(sb.toString(), displayer.displayedText().toString());
   }
   
   @Test

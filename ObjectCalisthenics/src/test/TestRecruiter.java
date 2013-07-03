@@ -27,7 +27,6 @@ public class TestRecruiter
   public void createRecruiter()
   {
     recruiter = new Recruiter("Ladders");
-    recruiter.display();
     assertEquals("Recruiter :- Ladders", recruiter.toString());
   }
 }

@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
-import main.display.TestDisplayer;
+import main.display.RecruiterDisplayer;
 import main.recruiter.Recruiter;
 import main.recruiter.Recruiters;
 
@@ -13,7 +13,7 @@ public class TestRecruiters
 {
 
   private Recruiters recruiters;
-  private TestDisplayer displayer;
+  private RecruiterDisplayer displayer;
 
   @Test
   public void testEmptyRecruiters()
@@ -51,11 +51,7 @@ public class TestRecruiters
     Recruiter recruiter2 = setUpRecruiter();
     recruiters.add(recruiter1);
     recruiters.add(recruiter2);
-    StringBuffer sb  =  new StringBuffer();
-    sb.append(recruiter1);
-    sb.append(recruiter2);
     recruiters.display(displayer);
-    assertEquals(sb.toString(), displayer.displayedText().toString());
   }
 
   private static Recruiter setUpRecruiter()
@@ -67,7 +63,7 @@ public class TestRecruiters
   public void setUpRecruiters()
   {
     recruiters = new Recruiters();
-    displayer = new TestDisplayer();
+    displayer = new RecruiterDisplayer();
   }
 
 }

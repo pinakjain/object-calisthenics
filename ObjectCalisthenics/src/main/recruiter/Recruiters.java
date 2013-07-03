@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import main.display.Displayer;
+import main.display.RecruiterDisplayer;
 
 public class Recruiters implements Iterable<Recruiter>
 {
@@ -24,11 +24,11 @@ public class Recruiters implements Iterable<Recruiter>
     return recruiter;
   }
 
-  public void display(Displayer displayer)
+  public void display(RecruiterDisplayer displayer)
   {
     for (Recruiter recruiter : recruiters)
     {
-      displayer.display(recruiter.toString());
+      recruiter.display(displayer);
     }
   }
 

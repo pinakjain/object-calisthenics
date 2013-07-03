@@ -1,6 +1,6 @@
 package main.jobseeker;
 
-import main.display.Displayer;
+import main.display.JobseekerDisplayer;
 import main.jobApplication.JobApplication;
 import main.jobApplication.JobApplicationManager;
 import main.jobApplication.JobApplications;
@@ -43,9 +43,9 @@ public class Jobseeker
     return applicationManager.appliedJobs(this);
   }
 
-  public void display(Displayer displayer)
+  public void display(JobseekerDisplayer displayer)
   {
-    System.out.println("Jobseeker :- " + name + " (ID = " + id + ")");
+    displayer.display(name);
   }
 
   @Override

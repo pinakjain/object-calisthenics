@@ -2,6 +2,7 @@ package main.recruiter;
 
 import java.util.Date;
 
+import main.display.RecruiterDisplayer;
 import main.jobApplication.JobApplicationManager;
 import main.jobs.Job;
 import main.jobs.Jobs;
@@ -21,9 +22,9 @@ public class Recruiter
     this.id = RecruiterId.createRecruiterId();
   }
 
-  public void display()
+  public void display(RecruiterDisplayer displayer)
   {
-    System.out.println("Recruiter :- " + name + " (ID = " + id + ")");
+    displayer.display(name);
   }
 
   public RecruiterJob postJob(Job job,

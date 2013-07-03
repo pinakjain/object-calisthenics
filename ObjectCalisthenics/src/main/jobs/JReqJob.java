@@ -1,5 +1,7 @@
 package main.jobs;
 
+import main.display.JobDisplayer;
+
 public class JReqJob implements Job
 {
 
@@ -18,7 +20,6 @@ public class JReqJob implements Job
     return true;
   }
 
-  @Override
   public void display()
   {
     System.out.println("JReq Job :-" + title + " (ID = " + id + ")");
@@ -45,5 +46,11 @@ public class JReqJob implements Job
   public String toString()
   {
     return "JReqJob :- " + title;
+  }
+
+  @Override
+  public void display(JobDisplayer displayer)
+  {
+    displayer.display(title);
   }
 }

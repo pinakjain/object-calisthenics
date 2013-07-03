@@ -1,5 +1,6 @@
 package main.jobs;
 
+import main.display.JobDisplayer;
 import main.recruiter.Recruiter;
 
 public class RecruiterJob
@@ -24,9 +25,9 @@ public class RecruiterJob
     return recruiter.equals(rec);
   }
 
-  public void display()
+  public void display(JobDisplayer displayer)
   {
-    job.display();
+    job.display(displayer);
   }
 
   public boolean requiresResume()
