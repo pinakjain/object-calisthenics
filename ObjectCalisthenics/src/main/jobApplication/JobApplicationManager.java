@@ -7,38 +7,17 @@ import java.util.List;
 import main.jobs.RecruiterJob;
 import main.jobseeker.Jobseeker;
 import main.jobseeker.Jobseekers;
-import main.recruiter.Recruiter;
 
 public class JobApplicationManager
 {
 
-  private final JobApplications       jobApplications;
-  private final JobApplicationFactory applicationFactory;
+  private final JobApplications jobApplications;
 
-  public JobApplicationManager(JobApplications jobApplications,
-                               JobApplicationFactory applicationFactory)
+  public JobApplicationManager(JobApplications jobApplications)
   {
     if (jobApplications == null)
       throw new IllegalArgumentException("Job applications cannot be null");
-    if (applicationFactory == null)
-      throw new IllegalArgumentException("Application factory cannot be null");
     this.jobApplications = jobApplications;
-    this.applicationFactory = applicationFactory;
-  }
-
-  public JobApplication apply(Jobseeker jobseeker,
-                              RecruiterJob job)
-  {
-    if (job == null)
-      throw new IllegalArgumentException("Job applied to cannot be null");
-    if (jobseeker == null)
-      throw new IllegalArgumentException("Jobseeker cannot be null");
-    return submitJobApplication(applicationFactory.createApplication(jobseeker, job));
-  }
-
-  private JobApplication submitJobApplication(JobApplication jobApplication)
-  {
-    return jobApplications.add(jobApplication);
   }
 
   public JobApplications appliedJobs(Jobseeker jobseeker)
@@ -108,43 +87,4 @@ public class JobApplicationManager
     }
   }
 
-  public int numberOfApplicationsForRecruiter(Recruiter recruiter)
-  {
-    List<JobApplication> applications = new ArrayList<>();
-    for (JobApplication application : jobApplications)
-    {
-      addApplicationIfPostedBy(recruiter, applications, application);
-    }
-    return applications.size();
-  }
-
-  private static void addApplicationIfPostedBy(Recruiter recruiter,
-                                               List<JobApplication> applications,
-                                               JobApplication application)
-  {
-    if (application.forJobPostedBy(recruiter))
-    {
-      applications.add(application);
-    }
-  }
-
-  public int numberOfApplicationsForJob(RecruiterJob recruiterJob)
-  {
-    List<JobApplication> applications = new ArrayList<>();
-    for (JobApplication application : jobApplications)
-    {
-      addApplicationIfAppliedFor(recruiterJob, applications, application);
-    }
-    return applications.size();
-  }
-
-  private static void addApplicationIfAppliedFor(RecruiterJob recruiterJob,
-                                                 List<JobApplication> applications,
-                                                 JobApplication application)
-  {
-    if (application.wasAppliedFor(recruiterJob))
-    {
-      applications.add(application);
-    }
-  }
 }

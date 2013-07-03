@@ -3,7 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import main.jobApplication.JobApplicationFactory;
-import main.jobApplication.JobApplicationManager;
+import main.jobApplication.JobApplicationProcessor;
 import main.jobApplication.JobApplications;
 import main.jobs.ATSJob;
 import main.jobs.RecruiterJob;
@@ -19,14 +19,14 @@ import org.junit.Test;
 
 public class TestLaddersJobApplications
 {
-  private Recruiter             recruiter;
-  private JobApplications       jobApplications;
-  private JobApplicationManager jobApplicationManager;
-  private ResumeRepository      resumeRepository;
-  private RecruiterJob          recruiterJob;
-  private Jobseeker             jobseeker1;
-  private Jobseeker             jobseeker2;
-  private JobApplicationFactory factory;
+  private Recruiter               recruiter;
+  private JobApplications         jobApplications;
+  private ResumeRepository        resumeRepository;
+  private RecruiterJob            recruiterJob;
+  private Jobseeker               jobseeker1;
+  private Jobseeker               jobseeker2;
+  private JobApplicationFactory   factory;
+  private JobApplicationProcessor jobApplicationProcessor;
 
   @Before
   public void setUp()
@@ -37,7 +37,12 @@ public class TestLaddersJobApplications
     setUpATSJob();
     setUpFactory();
     setUpJobApplications();
-    setUpJobApplicationManager();
+    setUpJobApplicationProcessor();
+  }
+
+  private void setUpJobApplicationProcessor()
+  {
+    jobApplicationProcessor = new JobApplicationProcessor(jobApplications);
   }
 
   private void setUpFactory()
@@ -48,13 +53,13 @@ public class TestLaddersJobApplications
   @Test
   public void numberOfJobApplicationsForRecruiterJob()
   {
-    assertEquals(2, jobApplicationManager.numberOfApplicationsForJob(recruiterJob));
+    assertEquals(2, jobApplicationProcessor.numberOfApplicationsForJob(recruiterJob));
   }
 
   @Test
   public void numberOfJobApplicationsForRecruiter()
   {
-    assertEquals(2, jobApplicationManager.numberOfApplicationsForRecruiter(recruiter));
+    assertEquals(2, jobApplicationProcessor.numberOfApplicationsForRecruiter(recruiter));
   }
 
   private void setUpJobApplications()
@@ -62,7 +67,8 @@ public class TestLaddersJobApplications
     jobApplications = new JobApplications();
     jobApplications.add(factory.createApplication(jobseeker1, recruiterJob));
     jobApplications.add(factory.createApplication(jobseeker2, recruiterJob));
-    jobApplications.add(factory.createApplication(jobseeker1, new RecruiterJob(new Recruiter("Dummy"), new ATSJob("Dummy"))));
+    jobApplications.add(factory.createApplication(jobseeker1, new RecruiterJob(new Recruiter("Dummy"),
+                                                                               new ATSJob("Dummy"))));
   }
 
   private void setUpJobseeker()
@@ -81,11 +87,6 @@ public class TestLaddersJobApplications
     resumeRepository = new ResumeRepository();
     resumeRepository.add(jobseeker1, new Resume("Resume 1"));
     resumeRepository.add(jobseeker2, new Resume("Resume 2"));
-  }
-
-  private void setUpJobApplicationManager()
-  {
-    jobApplicationManager = new JobApplicationManager(jobApplications, factory);
   }
 
   private void setUpATSJob()

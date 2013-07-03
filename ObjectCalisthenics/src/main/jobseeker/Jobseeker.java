@@ -1,8 +1,10 @@
 package main.jobseeker;
 
+import main.display.Displayer;
 import main.jobApplication.JobApplication;
 import main.jobApplication.JobApplicationManager;
 import main.jobApplication.JobApplications;
+import main.jobApplication.JobApplier;
 import main.jobs.Jobs;
 import main.jobs.RecruiterJob;
 import main.jobs.SavedJobsManager;
@@ -31,9 +33,9 @@ public class Jobseeker
   }
 
   public JobApplication apply(RecruiterJob job,
-                              JobApplicationManager applicationManager) throws IllegalArgumentException
+                              JobApplier jobApplier) throws IllegalArgumentException
   {
-    return applicationManager.apply(this, job);
+    return jobApplier.apply(this, job);
   }
 
   public JobApplications viewAppliedJobs(JobApplicationManager applicationManager)
@@ -41,7 +43,7 @@ public class Jobseeker
     return applicationManager.appliedJobs(this);
   }
 
-  public void display()
+  public void display(Displayer displayer)
   {
     System.out.println("Jobseeker :- " + name + " (ID = " + id + ")");
   }

@@ -137,7 +137,7 @@ public class TestRecruiterJobApplications
 
   private void setUpJobApplicationManager()
   {
-    jobApplicationManager = new JobApplicationManager(jobApplications, factory);
+    jobApplicationManager = new JobApplicationManager(jobApplications);
   }
 
   private void setUpATSJob()
